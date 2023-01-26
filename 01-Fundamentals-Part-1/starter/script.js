@@ -30,3 +30,49 @@ let myCountryPopulation = 150000;
 const myLanguage = 'english';
 
 // myCountry = 'UK';
+const halfPopulation = myCountryPopulation / 2;
+console.log(halfPopulation);
+
+myCountryPopulation++;
+console.log(myCountryPopulation);
+
+const finlandPopulation = 6000000;
+const averagePopulation = 33000000;
+console.log(myCountryPopulation > finlandPopulation);
+console.log(myCountryPopulation < averagePopulation);
+
+console.log(
+  myCountry +
+    ' ' +
+    'is a caribbean island with a population of' +
+    ' ' +
+    myCountryPopulation
+);
+
+/* *********Coding Challenge #1********** */
+
+const markMass = 78;
+const markHeight = 1.69;
+const johnMass = 92;
+const johnHeight = 1.95;
+
+const markBMI = markMass / markHeight ** 2;
+const johnBMI = johnMass / johnHeight ** 2;
+
+const markHigherBMI = markBMI > johnBMI;
+
+console.log(markBMI, johnBMI, markHigherBMI);
+
+// const markMass = 95;
+// const markHeight = 1.88;
+// const johnMass = 85;
+// const johnHeight = 1.76;
+
+// const markBMI = markMass / markHeight ** 2;
+// const johnBMI = johnMass / johnHeight ** 2;
+
+// console.log(markBMI);
+// console.log(johnBMI);
+
+// const markHigherBMI = markBMI > johnBMI;
+// console.log(markHigherBMI);
