@@ -80,12 +80,23 @@ console.log(markBMI, johnBMI, markHigherBMI);
 /* *********LECTURE: Strings and Template Literals********** */
 
 console.log(
-  `${myCountry} is a caribbean island with a population of ${myCountryPopulation}`
+  `${myCountry} is a caribbean island with a population of ${myCountryPopulation}.`
 );
 
 /* *********LECTURE: Taking Decisions: if / else Statements********** */
 if (myCountryPopulation > averagePopulation) {
-  console.log(` ${myCountry} population is above average`);
+  console.log(`${myCountry} population is above average.`);
 } else {
-  console.log(` ${myCountry} population is below average`);
+  console.log(`${myCountry} population is below average.`);
+}
+
+/* *********Coding Challenge #2********** */
+if (markBMI > johnBMI) {
+  console.log(
+    `Mark's BMI (${markBMI}) is higher than John's BMI (${johnBMI}).`
+  );
+} else {
+  console.log(
+    `John's BMI (${johnBMI}) is higher than Mark's BMI (${markBMI}).`
+  );
 }
