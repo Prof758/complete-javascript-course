@@ -116,3 +116,58 @@ console.log(Boolean('shan'));
 console.log(Boolean(0));
 console.log(Boolean(23));
 console.log(Boolean(null));
+
+/* *********LECTURE: Equality Operators: == vs. ===********** */
+// === strict(use mostly) and == loose
+/* !== (strict) or != (loose) different or not equal too 
+
+const numNeighbours = Number(
+  prompt('How many neighbour countries does your country have?')
+);
+if (numNeighbours === 1) {
+  console.log(`Only 1 border!`);
+} else if (numNeighbours > 1) {
+  console.log(`More than 1 border`);
+} else {
+  console.log(`No borders`);
+}
+*/
+
+/* *********Logical Operators********** */
+// && = and,  || = or, ! = not
+
+const speaksEnglish = true;
+const less50Mil = true;
+const isNotIsland = false;
+
+if (speaksEnglish && less50Mil && isNotIsland) {
+  console.log(`You would love ${myCountry}. `);
+} else {
+  console.log(`${myCountry} is not for you.`);
+}
+
+/* *********Coding Challenge #3********** */
+const averageScoreDolphins = (97 + 112 + 101) / 3;
+const averageScoreKoalas = (109 + 95 + 106) / 3;
+console.log(averageScoreDolphins, averageScoreKoalas);
+const minScore = 100;
+
+if (
+  averageScoreDolphins > averageScoreKoalas &&
+  averageScoreDolphins >= minScore
+) {
+  console.log(`Dolphins WIN!!!!!`);
+} else if (
+  averageScoreDolphins === averageScoreKoalas &&
+  averageScoreDolphins >= minScore &&
+  averageScoreKoalas >= minScore
+) {
+  console.log(`DRAW!!!!!`);
+} else if (
+  averageScoreKoalas > averageScoreDolphins &&
+  averageScoreKoalas >= minScore
+) {
+  console.log(`Koalas WIN!!!!!`);
+} else {
+  console.log(`Go home BIG L`);
+}
