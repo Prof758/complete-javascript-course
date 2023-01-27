@@ -100,3 +100,19 @@ if (markBMI > johnBMI) {
     `John's BMI (${johnBMI}) is higher than Mark's BMI (${markBMI}).`
   );
 }
+
+/* *********LECTURE: Type Conversion and Coercion********** */
+console.log('9' - '5'); // 4
+console.log('19' - '13' + '17'); //617
+console.log('19' - '13' + 17); //23
+console.log('123' < 57); //false
+console.log(5 + 6 + '4' + 9 - 4 - 2); //1149 - 6 = 1143
+
+/* *********Truthy and Falsy Values********** */
+// 5 falsy values: 0, NaN, '', undefined, null. Anything else is truthy.
+
+console.log(Boolean(''));
+console.log(Boolean('shan'));
+console.log(Boolean(0));
+console.log(Boolean(23));
+console.log(Boolean(null));
