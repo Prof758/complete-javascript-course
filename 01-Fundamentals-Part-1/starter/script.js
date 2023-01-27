@@ -26,7 +26,7 @@ console.log(typeof isIsland);
 // LECTURE: let, const and var
 const myCountry = 'Saint Lucia';
 const myContinent = 'North America';
-let myCountryPopulation = 150000;
+let myCountryPopulation = 45000000;
 const myLanguage = 'english';
 
 // myCountry = 'UK';
@@ -82,3 +82,10 @@ console.log(markBMI, johnBMI, markHigherBMI);
 console.log(
   `${myCountry} is a caribbean island with a population of ${myCountryPopulation}`
 );
+
+/* *********LECTURE: Taking Decisions: if / else Statements********** */
+if (myCountryPopulation > averagePopulation) {
+  console.log(` ${myCountry} population is above average`);
+} else {
+  console.log(` ${myCountry} population is below average`);
+}
