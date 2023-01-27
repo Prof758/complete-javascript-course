@@ -76,3 +76,9 @@ console.log(markBMI, johnBMI, markHigherBMI);
 
 // const markHigherBMI = markBMI > johnBMI;
 // console.log(markHigherBMI);
+
+/* *********LECTURE: Strings and Template Literals********** */
+
+console.log(
+  `${myCountry} is a caribbean island with a population of ${myCountryPopulation}`
+);
