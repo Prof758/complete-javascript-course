@@ -171,3 +171,82 @@ if (
 } else {
   console.log(`Go home BIG L`);
 }
+
+/* *********LECTURE: The switch Statement********** */
+// works with === statements
+
+// const language = prompt('what language do you say?');
+const language = 'english';
+switch (language) {
+  case 'mandarin':
+    console.log('MOST number of native speakers!');
+    break;
+  case 'spanish':
+    console.log('2nd place in number of native speakers');
+    break;
+  case 'english':
+    console.log('3nd place in number of native speakers');
+    break;
+  case 'hindi':
+    console.log('4nd place in number of native speakers');
+    break;
+  default:
+    console.log('Great language too :D');
+}
+
+/* does the same as above but with if, else if and else statement 
+const dayOfWeek = prompt('what day is it');
+
+if (dayOfWeek === 'monday') {
+  console.log('love monday we at work');
+} else if (dayOfWeek === 'tuesday') {
+  console.log('code meetup night');
+} else if (dayOfWeek === 'wednesday' || dayOfWeek === 'thursday') {
+  console.log('code meetup night');
+} else {
+  ('please focus');
+}
+*/
+
+/* *********LECTURE: The Conditional (Ternary) Operator********** */
+const myPopulation = 43;
+
+myPopulation >= 33
+  ? console.log(`${myCountry} population is above average`)
+  : console.log(`${myCountry} population is below average`);
+
+const populationStatus = myPopulation >= 33 ? `above average` : `below average`;
+
+console.log(`${myCountry} population is ${populationStatus}`);
+
+console.log(
+  `${myCountry} population is ${
+    myPopulation >= 33 ? `above average` : `below average`
+  }`
+);
+
+/* *********Coding Challenge #4********** */
+// using if/else
+const bill = 430;
+if (bill >= 50 && bill <= 300) {
+  console.log(`The bill was ${bill} the tip was ${0.15 * bill}`);
+} else {
+  console.log(`The bill was ${bill} the tip was ${0.2 * bill}`);
+}
+
+// my way. long is long but results the same
+const billStatement =
+  bill >= 50 && bill <= 300
+    ? `The bill was £${bill}, the tip was £${0.15 * bill} the total value is £${
+        bill + 0.15 * bill
+      }`
+    : `The bill was £${bill}, the tip was £${0.2 * bill} the total value is £${
+        bill + 0.2 * bill
+      }`;
+console.log(billStatement);
+
+// short code same results
+const tip = bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+console.log(
+  `The bill was £${bill}, the tip was £${tip} the total value is £${bill + tip}`
+);
