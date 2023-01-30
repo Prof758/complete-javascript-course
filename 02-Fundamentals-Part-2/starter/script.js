@@ -87,3 +87,25 @@ function describePopulation(country, population) {
 }
 
 console.log(describePopulation('China', 1441));
+
+/* ****** LCoding Challenge 1 functions ****** */
+const calcAverage = (scoreOne, scoreTwo, scoreThree) =>
+  (scoreOne + scoreTwo + scoreThree) / 3;
+
+const scoreDolphins = calcAverage(85, 70, 41);
+const scoreKoalas = calcAverage(20, 30, 20);
+
+console.log(scoreDolphins, scoreKoalas);
+
+function checkWinner(avgDolphins, avgKoalas) {
+  if (avgDolphins >= 2 * avgKoalas) {
+    return `Dolphin wins!!!!`;
+  } else if (avgKoalas >= 2 * avgDolphins) {
+    return `Koalas wins!!!!`;
+  } else {
+    return `Two Ls`;
+  }
+}
+
+console.log(checkWinner(scoreDolphins, scoreKoalas));
+console.log(checkWinner(10, 50));
