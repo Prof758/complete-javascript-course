@@ -127,3 +127,38 @@ const percentages = [
 ];
 
 console.log(percentages);
+
+/* ****** Basic Array Operations (Methods)  ****** */
+const shanFriends = ['Jev', 'Lando', 'Fev', 'Jezze'];
+
+// add elements
+shanFriends.push('Jake'); // adds Jake to the back of the array
+shanFriends.unshift('Big L'); // adds Big L to the front
+console.log(shanFriends);
+
+// remove element. Can be store in a variable to return the removed element.
+const lostOne = shanFriends.pop(); // remove Jake from the back of the array
+const lostTwo = shanFriends.shift(); //remove from the front of the array
+console.log(shanFriends);
+const lostFriends = [lostOne, lostTwo];
+console.log(lostFriends);
+
+// To find index
+console.log(shanFriends.indexOf('Jev'));
+
+// If includes returns true or false
+console.log(shanFriends.includes('Fev'));
+console.log(shanFriends.includes('Emma'));
+
+const neighbours = ['Vincy', 'Labar', 'Greens', 'Brim'];
+neighbours.push('Utopia');
+neighbours.pop();
+
+if (neighbours.includes('Germany')) {
+  console.log(`Probably in a central European country :D`);
+} else {
+  console.log(`Probably not a central European country :D`);
+}
+console.log(neighbours.indexOf('Brim'));
+neighbours[3] = 'Domin';
+console.log(neighbours);
