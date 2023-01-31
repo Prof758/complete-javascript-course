@@ -88,7 +88,7 @@ function describePopulation(country, population) {
 
 console.log(describePopulation('China', 1441));
 
-/* ****** LCoding Challenge 1 functions ****** */
+/* ****** Coding Challenge 1 functions ****** */
 const calcAverage = (scoreOne, scoreTwo, scoreThree) =>
   (scoreOne + scoreTwo + scoreThree) / 3;
 
@@ -109,3 +109,21 @@ function checkWinner(avgDolphins, avgKoalas) {
 
 console.log(checkWinner(scoreDolphins, scoreKoalas));
 console.log(checkWinner(10, 50));
+
+/* ****** Introduction to Arrays  ****** */
+const populations = [45, 78, 19, 23];
+
+if (populations.length === 4) {
+  console.log(true);
+} else {
+  console.log(false);
+}
+
+const percentages = [
+  percentageOfWorld(populations[0]),
+  percentageOfWorld(populations[1]),
+  percentageOfWorld(populations[2]),
+  percentageOfWorld(populations[3]),
+];
+
+console.log(percentages);
