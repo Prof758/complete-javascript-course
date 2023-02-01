@@ -189,9 +189,30 @@ const myCountry = {
 };
 
 /* ****** Dot vs. Bracket Notation  ****** */
-myCountry.population = 16;
-myCountry['population'] = 12;
 
 console.log(
   `${myCountry.country} has ${myCountry.population} million ${myCountry.language}-speaking people, ${myCountry.neighbours.length} neighbouring countries and a capital called ${myCountry.capital}`
 );
+
+/* ****** Object Methods  ****** */
+const myCountryCaribbean = {
+  country: 'Lucia',
+  capital: 'Castries',
+  language: 'English',
+  population: 1,
+  neighbours: ['Wales', 'Scotland', 'Ireland', 'EU'],
+  isIsland: true,
+  describe: function () {
+    console.log(
+      `${this.country} has ${this.population} million ${
+        this.language
+      }-speaking people, ${
+        this.neighbours.length
+      } neighboring countries, a capital called ${this.capital} and is ${
+        this.isIsland ? 'an island' : 'not an island'
+      }.`
+    );
+  },
+};
+
+console.log(myCountryCaribbean.describe());
