@@ -178,3 +178,20 @@ console.log(tips);
 
 const total = [tips[0] + bills[0], tips[1] + bills[1], tips[2] + bills[2]];
 console.log(total);
+
+/* ****** Introduction to Objects  ****** */
+const myCountry = {
+  country: 'England',
+  capital: 'London',
+  language: 'English',
+  population: 14,
+  neighbours: ['Wales', 'Scotland', 'Ireland', 'EU'],
+};
+
+/* ****** Dot vs. Bracket Notation  ****** */
+myCountry.population = 16;
+myCountry['population'] = 12;
+
+console.log(
+  `${myCountry.country} has ${myCountry.population} million ${myCountry.language}-speaking people, ${myCountry.neighbours.length} neighbouring countries and a capital called ${myCountry.capital}`
+);
