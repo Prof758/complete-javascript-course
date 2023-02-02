@@ -194,8 +194,7 @@ console.log(
   `${myCountry.country} has ${myCountry.population} million ${myCountry.language}-speaking people, ${myCountry.neighbours.length} neighbouring countries and a capital called ${myCountry.capital}`
 );
 
-/* ****** Object Methods  ****** */
-const myCountryCaribbean = {
+/* ****** Object Methods  ****** */ const myCountryCaribbean = {
   country: 'Lucia',
   capital: 'Castries',
   language: 'English',
@@ -216,3 +215,32 @@ const myCountryCaribbean = {
 };
 
 console.log(myCountryCaribbean.describe());
+
+/* ****** Coding Challenge No. 3 ****** */
+const mark = {
+  fullName: 'Mark Miller',
+  mass: 78,
+  height: 1.69,
+  calcBMI: function (mass, height) {
+    this.BMI = this.mass / this.height ** 2;
+    return this.BMI;
+  },
+};
+
+const john = {
+  fullName: 'John Smith',
+  mass: 92,
+  height: 1.95,
+  calcBMI: function (mass, height) {
+    this.BMI = this.mass / this.height ** 2;
+    return this.BMI;
+  },
+};
+
+const higherBMI =
+  mark.BMI > john.BMI
+    ? `${mark.fullName}'s BMI (${mark.BMI}) is higher than ${john.fullName}'s BMI (${john.BMI})`
+    : `${john.fullName}'s BMI (${john.BMI}) is higher than ${mark.fullName}'s BMI (${mark.BMI})`;
+
+console.log(higherBMI);
+console.log(mark.BMI);
