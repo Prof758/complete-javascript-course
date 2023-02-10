@@ -194,7 +194,9 @@ console.log(
   `${myCountry.country} has ${myCountry.population} million ${myCountry.language}-speaking people, ${myCountry.neighbours.length} neighbouring countries and a capital called ${myCountry.capital}`
 );
 
-/* ****** Object Methods  ****** */ const myCountryCaribbean = {
+/* ****** Object Methods  ****** */
+
+const myCountryCaribbean = {
   country: 'Lucia',
   capital: 'Castries',
   language: 'English',
@@ -249,3 +251,46 @@ console.log(higherBMI);
 console.log(mark.bmi);
 console.log(john.bmi);
 console.log(john.calcBMI());
+
+/* ******  Iteration: The for Loop ****** */
+for (let i = 1; i <= 5; i++) {
+  console.log(`Voter number ${i} is currently voting`);
+}
+
+for (let voterNum = 1; voterNum <= 5; voterNum++) {
+  console.log(`Voter number ${voterNum} is currently voting for SLP`);
+}
+
+/* ****** Looping Arrays, Breaking and Continuing ****** */
+
+const simonArray = [
+  'Simon',
+  'Prophet',
+  1982,
+  'soldier',
+  ['Jev', 'Fev', 'Jezze'],
+  true,
+];
+
+const types = [];
+
+for (let i = 0; i < simonArray.length; i++) {
+  console.log(simonArray[i]);
+  types.push(typeof simonArray[i]);
+}
+console.log(types);
+
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
+
+for (let i = 0; i < years.length; i++) {
+  ages.push(2037 - years[i]);
+}
+console.log(ages);
+
+const percentages2 = [];
+for (let i = 0; i < percentages.length; i++) {
+  const num = percentageOfWorld(percentages[i]);
+  percentages2.push(num);
+}
+console.log(percentages2);
