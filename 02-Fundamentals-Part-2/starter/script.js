@@ -341,3 +341,50 @@ while (dice !== 6) {
     console.log(`You rolled a ${dice}, WINNER!!!`);
   }
 }
+
+// const percentages2 = [];
+// for (let i = 0; i < percentages.length; i++) {
+//   const num = percentageOfWorld(percentages[i]);
+//   percentages2.push(num);
+// }
+// console.log(percentages2);
+
+const percentages3 = [];
+let i = 0;
+while (i < percentages.length) {
+  const num = percentageOfWorld(percentages[i]);
+  i++;
+  percentages3.push(num);
+}
+
+console.log(percentages3);
+
+/* ******* Coding Challenge #4 ****** */
+
+const billsC4 = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+const tipsC4 = [];
+const totalsC4 = [];
+
+for (let i = 0; i < billsC4.length; i++) {
+  // function calcTipC4(i) {
+  //   const tipC4 = i >= 50 && i <= 300 ? i * 0.15 : i * 0.2;
+  //   tipsC4.push(tipC4);
+  //   totalsC4.push(i + tipC4);
+  // }
+  const tip = calcTip(billsC4[i]);
+  tipsC4.push(tip);
+  totalsC4.push(billsC4[i] + tip);
+}
+
+console.log(tipsC4);
+console.log(totalsC4);
+
+const calcAverageC4 = function (arr) {
+  let sumC4 = 0;
+  for (let i = 0; i < arr.length; i++) {
+    sumC4 += arr[i];
+  }
+  return sumC4 / arr.length;
+};
+
+console.log(calcAverageC4(totalsC4));
