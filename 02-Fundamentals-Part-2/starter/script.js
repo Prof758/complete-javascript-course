@@ -294,3 +294,33 @@ for (let i = 0; i < percentages.length; i++) {
   percentages2.push(num);
 }
 console.log(percentages2);
+
+/* ****** Looping Backwards and Loops in Loops ****** */
+// Looping Backwards
+for (let i = simonArray.length - 1; i >= 0; i--) {
+  console.log(simonArray[i]);
+}
+
+// Loops in Loops
+for (let training = 1; training <= 3; training++) {
+  console.log(`_____Training ${training}`);
+  for (let rep = 1; rep <= 5; rep++) {
+    console.log(`Training no. ${training}, working out lift ${rep}`);
+  }
+}
+
+const listOfNeighbours = [
+  ['Canada', 'Mexico'],
+  ['Spain'],
+  ['Norway', 'Sweden', 'Russia'],
+];
+
+// LECTURE: Looping Backwards and Loops in Loops
+// 1. Storethisarrayofarraysintoavariablecalled'listOfNeighbours' [['Canada', 'Mexico'], ['Spain'], ['Norway', 'Sweden', 'Russia']];
+// 2. Logonlytheneighbouringcountriestotheconsole,onebyone,nottheentire arrays. Log a string like 'Neighbour: Canada' for each country
+// 3. Youwillneedaloopinsidealoopforthis.Thisisactuallyabittricky,sodon't worry if it's too difficult for you! But you can still try to figure this out anyway
+for (let i = 0; i < listOfNeighbours.length; i++) {
+  for (let y = 0; y < listOfNeighbours[i].length; y++) {
+    console.log(`Neighbour: ${listOfNeighbours[i][y]}`);
+  }
+}
