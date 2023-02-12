@@ -388,3 +388,19 @@ const calcAverageC4 = function (arr) {
 };
 
 console.log(calcAverageC4(totalsC4));
+
+/* ******* Coding Challenge For Developer Skills ****** */
+
+const tempsArray = [17, 21, 23];
+const tempsArrayTwo = [12, 5, -5, 0, 4];
+
+let str = '';
+const printForecast = function (arr) {
+  for (let i = 0; i < arr.length; i++) {
+    const temp = arr[i];
+    console.log(`...${temp}C in ${i + 1} days`);
+  }
+};
+
+printForecast(tempsArray);
+printForecast(tempsArrayTwo);
