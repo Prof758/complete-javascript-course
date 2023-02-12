@@ -138,7 +138,7 @@ console.log(shanFriends);
 
 // remove element. Can be store in a variable to return the removed element.
 const lostOne = shanFriends.pop(); // remove Jake from the back of the array
-const lostTwo = shanFriends.shift(); //remove from the front of the array
+const lostTwo = shanFriends.shift(); // remove from the front of the array
 console.log(shanFriends);
 const lostFriends = [lostOne, lostTwo];
 console.log(lostFriends);
