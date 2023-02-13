@@ -280,6 +280,7 @@ for (let i = 0; i < simonArray.length; i++) {
 }
 console.log(types);
 
+/* example below */
 const years = [1991, 2007, 1969, 2020];
 const ages = [];
 
@@ -288,6 +289,7 @@ for (let i = 0; i < years.length; i++) {
 }
 console.log(ages);
 
+/* example below */
 const percentages2 = [];
 for (let i = 0; i < percentages.length; i++) {
   const num = percentageOfWorld(percentages[i]);
@@ -309,13 +311,13 @@ for (let training = 1; training <= 3; training++) {
   }
 }
 
+// LECTURE: Looping Backwards and Loops in Loops
 const listOfNeighbours = [
   ['Canada', 'Mexico'],
   ['Spain'],
   ['Norway', 'Sweden', 'Russia'],
 ];
 
-// LECTURE: Looping Backwards and Loops in Loops
 // 1. Storethisarrayofarraysintoavariablecalled'listOfNeighbours' [['Canada', 'Mexico'], ['Spain'], ['Norway', 'Sweden', 'Russia']];
 // 2. Logonlytheneighbouringcountriestotheconsole,onebyone,nottheentire arrays. Log a string like 'Neighbour: Canada' for each country
 // 3. Youwillneedaloopinsidealoopforthis.Thisisactuallyabittricky,sodon't worry if it's too difficult for you! But you can still try to figure this out anyway
@@ -379,6 +381,7 @@ for (let i = 0; i < billsC4.length; i++) {
 console.log(tipsC4);
 console.log(totalsC4);
 
+/* BONUS Challenge example below */
 const calcAverageC4 = function (arr) {
   let sumC4 = 0;
   for (let i = 0; i < arr.length; i++) {
