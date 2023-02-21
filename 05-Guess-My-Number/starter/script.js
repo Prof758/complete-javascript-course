@@ -1,30 +1,32 @@
 'use strict';
 
-/* ***** Basic syntax DOM **** */
-const test = document.querySelector('h1').textContent;
+/* ***** Basic syntax for DOM **** */
+let test = document.querySelector('h1').textContent;
 
+console.log(test);
+test = `Guess NEW number !!!!`;
 console.log(test);
 
 // document.querySelector('h1').textContent = `Guess NEW number !!!!`;
-
-console.log(document.querySelector('.guess').value);
-
-const displayMessage = function (message) {
-  document.querySelector('.message').textContent = message;
-};
 
 //console.log(displayMessage('We in there '));
 // document.querySelector('.guess').textContent = 23;
 // console.log(document.querySelector('.guess').textContent);
 
+console.log(document.querySelector('.guess').value);
+
 /* ***** ***************** **** */
 
-/* ***** NUmber Guessing Game **** */
+/* ***** Number Guessing Game **** */
 
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 //document.querySelector('.number').textContent = secretNumber;
 let score = 20;
 let highscore = 0;
+
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
 
 document.querySelector('.check').addEventListener('click', function () {
   const userGuess = Number(document.querySelector('.guess').value);
