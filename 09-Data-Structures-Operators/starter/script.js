@@ -42,6 +42,9 @@ const restaurant = {
       `Order received: ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainMenuIndex]} for ${time}hrs to address: ${address}`
     );
   },
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Your pasta order made with ${ing1}, ${ing2} and ${ing3}`);
+  },
 };
 
 /* ************** Destructuring Arrays **************** */
@@ -129,8 +132,57 @@ restaurant.orderDelivery({
 });
 
 // destructuring using function default values
-
 restaurant.orderDelivery({
   address: '10 Daisy Lane ',
   mainMenuIndex: 0,
 });
+
+/* ************** Spread Operator (...) **************** */
+
+const oriArray = [9, 8, 7, 6];
+const updArray = [12, 11, 10, ...oriArray]; //using the spread operator to add the array element individually
+console.log(updArray); // output the new array
+console.log(...updArray); // output array individual elements
+
+// create a new array with current mainMenu array w/ new meals
+const newMenu = [...restaurant.mainMenu, 'oil down', 'saltfish&figs'];
+console.log(newMenu);
+
+// copy an array
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log(`Copy of main menu: ${mainMenuCopy}`);
+console.log(mainMenuCopy);
+
+// join to array
+const restaurantMenu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(restaurantMenu);
+
+// Iterables: arrays, strings. maps and sets but NOT objects.
+const str = 'Simon';
+const strArr = [...str];
+console.log(strArr);
+
+// Real example w/ orderPasta function using prompts and spread operator
+const ingredients = [
+  // prompt(`let's make your pasta, first ingredient `),
+  // prompt(`make your pasta, second ingredient `),
+  // prompt(`make your pasta, third ingredient `),
+];
+console.log(ingredients);
+
+restaurant.orderPasta(...ingredients);
+
+// with ES18 the spread operator works with objects
+
+// same as above copies original obj and add new elements to it
+const newRestaurantObj = {
+  ...restaurant,
+  founder: 'Simon Prophet',
+  dateFounded: 1982,
+};
+console.log(newRestaurantObj);
+
+// create a copy
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Simon Prophet Lab'; // change name in copy but does not on original
+console.log(restaurantCopy, restaurant);
