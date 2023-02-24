@@ -45,6 +45,11 @@ const restaurant = {
   orderPasta: function (ing1, ing2, ing3) {
     console.log(`Your pasta order made with ${ing1}, ${ing2} and ${ing3}`);
   },
+  orderPizza: function (topping, ...extraTopping) {
+    console.log(
+      `Your ${topping} pizza is ready. Extra topping: ${extraTopping} `
+    );
+  },
 };
 
 /* ************** Destructuring Arrays **************** */
@@ -114,14 +119,14 @@ const obj = { s: 23, p: 44, t: 7 };
 console.log(s, p);
 
 // Nested objects
-console.log(openingHours); // openings times is nested in restaurant
-const { sat } = openingHours;
-console.log(sat);
-const {
-  sat: { open, close },
-} = openingHours; // destructuring open and close times from Sat.
-console.log(open, close);
-console.log(` Our opening time ${open} and we close at ${close}`);
+// console.log(openingHours); // openings times is nested in restaurant
+// const { sat } = openingHours;
+// console.log(sat);
+// const {
+//   sat: { open, close },
+// } = openingHours; // destructuring open and close times from Sat.
+// console.log(open, close);
+// console.log(` Our opening time ${open} and we close at ${close}`);
 
 // destructuring from a function
 restaurant.orderDelivery({
@@ -186,3 +191,39 @@ console.log(newRestaurantObj);
 const restaurantCopy = { ...restaurant };
 restaurantCopy.name = 'Simon Prophet Lab'; // change name in copy but does not on original
 console.log(restaurantCopy, restaurant);
+
+/* ************** Rest Pattern and Parameters  **************** */
+// Use to collect vales into array, works opposite to spread operator.
+// REST [...arr] is on the left side of the =. must be the last element.
+const [a1, b1, ...restArr] = [1, 2, 3, 4, 5, 6, 7];
+console.log(a1, b1, restArr);
+
+const [bestSeller, notSelling, ...aveMealer] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(bestSeller, notSelling, aveMealer);
+
+// rest also works in Objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
+console.log(sat);
+
+// rest operator in functions
+const add = function (...num) {
+  // this function can take any number of parameters
+  let ans = 0;
+  for (let i = 0; i < num.length; i++) {
+    ans += num[i];
+  }
+  console.log(ans);
+};
+add(2, 3);
+add(2, 3, 5);
+add(2, 3, 5, 10);
+
+// using the rest operator to add all the element in array using the function above.
+const xy = [5, 50, 10, 15];
+add(...xy);
+
+restaurant.orderPizza('salme', 'mushrooms', 'orions', 'more cheese');
