@@ -269,3 +269,46 @@ restaurant.numGuests = 0;
 
 const guestNumsNull = restaurant.numGuests ?? 2;
 console.log(guestNumsNull);
+
+/* ************** Logical Assignment Operators **************** */
+console.log(`---- ??= ||= &&= -----`);
+const rest1 = {
+  numGuest: 5,
+  name: 'the Lab',
+  numStaff: 0,
+};
+
+const rest2 = {
+  owner: 'Simon',
+  name: 'Sim Lab',
+  //numStaff: 4,
+};
+// Or assignment operator ||=
+console.log(`---- ||= ----`);
+//rest1.numGuest = rest1.numGuest || 10;
+rest1.numGuest ||= 10;
+//rest1.owner ||= 'Prof';
+console.log(rest1);
+
+//rest2.numGuest = rest2.numGuest || 10;
+rest2.numGuest ||= 10;
+console.log(rest2);
+// in both cases above the code checks if numGuest and owner exist and assign a value.
+
+// Nullish assignment operator ??=
+console.log(`---- ??= ----`);
+//rest1.numStaff = rest1.numStaff ?? 7;
+rest1.numStaff ??= 7;
+console.log(rest1.numStaff);
+rest2.numStaff ??= 7;
+console.log(rest2.numStaff);
+
+// And assignment operator
+console.log(`---- &&= ----`);
+// used to replace a truty value
+// rest1.owner = rest1.owner && '<UNKNOWN>';
+rest1.owner &&= '<UNKNOWN>';
+console.log(rest1);
+// rest2.owner = rest2.owner && '<UNKNOWN>';
+rest2.owner &&= '<UNKNOWN>';
+console.log(rest2);
