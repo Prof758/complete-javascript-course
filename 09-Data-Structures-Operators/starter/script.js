@@ -143,7 +143,7 @@ restaurant.orderDelivery({
 });
 
 /* ************** Spread Operator (...) **************** */
-// [...arr] is on the right side of = 
+// [...arr] is on the right side of =
 
 const oriArray = [9, 8, 7, 6];
 const updArray = [12, 11, 10, ...oriArray]; //using the spread operator to add the array element individually
@@ -229,3 +229,35 @@ const xy = [5, 50, 10, 15];
 add(...xy);
 
 restaurant.orderPizza('salme', 'mushrooms', 'orion', 'more cheese');
+
+/* ************** Short Circuiting (&& and ||) **************** */
+// In short circuiting, || returns the first truty value and && returns the first falsety value
+// use any data type, return any data type
+console.log('----- || -----');
+console.log(3 || 'simon');
+console.log(0 || 1);
+console.log(0 || null); //returns second falsety value if both are falsety
+console.log(null || 'today');
+console.log('' || undefined || 0 || null || false || 45 || 'prof'); // 45 is the first truty value
+
+// Real world example
+restaurant.numGuests = 100;
+const guestNums1 = restaurant.numGuests ? restaurant.numGuests : 2;
+console.log(guestNums1); // when restaurant.numGuests is undefined it returns 10
+
+const guestNums2 = restaurant.numGuests || 2;
+console.log(guestNums2);
+
+console.log('----- && -----');
+console.log(3 && 'simon'); // returns second truty value if both are truty
+console.log(0 && 1);
+console.log(null && 'today');
+console.log(23 && undefined && 0 && null && false && 45 && 'prof');
+
+// Real world example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('orion', 'extra cheese');
+}
+
+restaurant.orderPizza &&
+  restaurant.orderPizza('pepperoni', 'orion', 'extra cheese');
