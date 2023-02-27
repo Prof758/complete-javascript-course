@@ -261,3 +261,11 @@ if (restaurant.orderPizza) {
 
 restaurant.orderPizza &&
   restaurant.orderPizza('pepperoni', 'orion', 'extra cheese');
+
+/* ************** Nullish Coalescing Operator (??) **************** */
+// works with null and undefined and NOT 0 and '' therefore is will return 0 and '' and only short circuit if the value is null and undefined.
+console.log(`----- ?? -----`);
+restaurant.numGuests = 0;
+
+const guestNumsNull = restaurant.numGuests ?? 2;
+console.log(guestNumsNull);
