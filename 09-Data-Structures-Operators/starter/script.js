@@ -102,7 +102,7 @@ const {
 } = restaurant;
 //console.log(restaurantName, timing, tags);
 
-// adding default values
+// change variable name and adding default values in object
 const {
   starterMenu: starters = ['Unknown'],
   mainMenu: Menu = ['Unknown'],
@@ -143,6 +143,7 @@ restaurant.orderDelivery({
 });
 
 /* ************** Spread Operator (...) **************** */
+// [...arr] is on the right side of = 
 
 const oriArray = [9, 8, 7, 6];
 const updArray = [12, 11, 10, ...oriArray]; //using the spread operator to add the array element individually
@@ -167,7 +168,7 @@ const str = 'Simon';
 const strArr = [...str];
 console.log(strArr);
 
-// Real example w/ orderPasta function using prompts and spread operator
+// Real world example w/ orderPasta function using prompts and spread operator
 const ingredients = [
   // prompt(`let's make your pasta, first ingredient `),
   // prompt(`make your pasta, second ingredient `),
@@ -195,6 +196,7 @@ console.log(restaurantCopy, restaurant);
 /* ************** Rest Pattern and Parameters  **************** */
 // Use to collect vales into array, works opposite to spread operator.
 // REST [...arr] is on the left side of the =. must be the last element.
+
 const [a1, b1, ...restArr] = [1, 2, 3, 4, 5, 6, 7];
 console.log(a1, b1, restArr);
 
@@ -226,4 +228,4 @@ add(2, 3, 5, 10);
 const xy = [5, 50, 10, 15];
 add(...xy);
 
-restaurant.orderPizza('salme', 'mushrooms', 'orions', 'more cheese');
+restaurant.orderPizza('salme', 'mushrooms', 'orion', 'more cheese');
