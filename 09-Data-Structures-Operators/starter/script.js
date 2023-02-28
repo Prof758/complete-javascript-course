@@ -442,3 +442,41 @@ for (const [i, el] of newRestaurantMenuCopy.entries()) {
 for (const i of newRestaurantMenuCopy.entries()) {
   console.log(`${i[0] + 1} : ${i[1]}`);
 }
+
+/* ******** Enhanced Object Literals ******** */
+console.log(`-------Enhanced Object Literals ES6 features-------`);
+// adding add object to anther object
+
+const testObj1 = {
+  location: 'UK',
+  visa: 'yes',
+  // below shows the new way of writing function in object with ES6
+  newFunction(yearIssued, years) {
+    const renewDate = yearIssued + years;
+    return renewDate;
+  },
+};
+
+const testObj2 = {
+  name: 'simon',
+  height: '6-2',
+  age: 40,
+  testObj1, // ES6 enhanced object literal
+};
+
+console.log(testObj2);
+
+// ES6 can be used to calculate property name
+const weekday = ['Mon', 'Tru', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+const workTimes = {
+  [`Day- 1 ${weekday[0]}`]: '0800 to 1600', // example 1
+  [weekday[1]]: '0800 to 1600', // example 2
+};
+
+const testObj3 = {
+  ...testObj2,
+  workTimes,
+};
+
+console.log(testObj3);
