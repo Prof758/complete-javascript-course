@@ -419,3 +419,26 @@ printGoals(...game.scored);
 // 7. The team with the lower odd is more likely to win. Print to the console which team is more likely to win, WITHOUT using an if/else statement or the ternary operator.
 team1 < team2 && console.log(`team 1 is most likely to WIN`);
 team1 > team2 && console.log(`team 2 is most likely to WIN`);
+
+/* ******** Looping Arrays: The for-of Loop ******** */
+console.log(`-------The for-of Loop---------`);
+const newRestaurantMenuCopy = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+
+for (const i of newRestaurantMenuCopy) console.log(i);
+
+for (const i of newRestaurantMenuCopy.entries()) {
+  console.log(i);
+}
+
+// using destruction method in a for of loop
+for (const [i, el] of newRestaurantMenuCopy.entries()) {
+  console.log(`${i + 1} : ${el}`);
+}
+
+// same as above but old method of select elements in loop
+for (const i of newRestaurantMenuCopy.entries()) {
+  console.log(`${i[0] + 1} : ${i[1]}`);
+}
