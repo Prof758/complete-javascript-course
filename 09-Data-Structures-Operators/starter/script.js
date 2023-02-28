@@ -467,7 +467,7 @@ const testObj2 = {
 console.log(testObj2);
 
 // ES6 can be used to calculate property name
-const weekday = ['Mon', 'Tru', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const weekday = ['mon', 'tru', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
 const workTimes = {
   [`Day- 1 ${weekday[0]}`]: '0800 to 1600', // example 1
@@ -480,3 +480,49 @@ const testObj3 = {
 };
 
 console.log(testObj3);
+
+/* ******** Optional Chaining (?.) ******** */
+console.log(`-------Optional Chaining (?.)-------`);
+// are used to check if a property exist within a array or object
+
+if (restaurant.openingHours.mon) {
+  console.log(restaurant.openingHours.mon.open);
+} else {
+  console.log(`sorry closed today`);
+}
+
+// below example of Optional Chaining (?.)
+if (restaurant.openingHours.mon?.open)
+  console.log(restaurant.openingHours.mon.open);
+
+// real world example
+for (const day of weekday) {
+  const openTime = restaurant.openingHours[day]?.open ?? 'CLOSED';
+  console.log(`${day}: open at ${openTime} `);
+}
+
+// Can be used to check if a method exist
+const orderMeal1 = restaurant.order?.(0, 1) ?? `No meals today`;
+console.log(orderMeal1);
+const orderMeal2 = restaurant.orderChicken?.(0, 1) ?? `No meals today`;
+console.log(orderMeal2);
+
+// Can be used in Array as well
+const arrTest1 = [
+  {
+    name: 'Tim',
+    number: 3,
+    points: 32,
+  },
+];
+const checkPoints1 = arrTest1[0]?.points ?? `Did not play`;
+console.log(checkPoints1);
+
+const arrTest2 = [
+  {
+    name: 'Jack',
+    number: 10,
+  },
+];
+const checkPoints2 = arrTest2[0]?.points ?? `Did not play`;
+console.log(checkPoints2);
