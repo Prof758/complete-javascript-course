@@ -405,9 +405,13 @@ console.log(team1, team2, draw);
 // 6. Write a function ('printGoals') that receives an arbitrary number of player names (NOT an array) and prints each of them to the console, along with the number of goals that were scored in total (number of player names passed in)TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
 
 const printGoals = function (...players) {
+  let playerScored = '';
   console.log(`${players.length} goals were scored`);
-  for (let i = 0; i < game.scored.length; i++) {
-    console.log(`${game.scored[i]} scored`);
+  if (players.length > 0) {
+    for (let i = 0; i < game.scored.length; i++) {
+      playerScored = `${game.scored[i]} scored`;
+      console.log(playerScored);
+    }
   }
 };
 printGoals(...game.scored);
