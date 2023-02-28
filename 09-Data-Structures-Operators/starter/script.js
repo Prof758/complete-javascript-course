@@ -526,3 +526,56 @@ const arrTest2 = [
 ];
 const checkPoints2 = arrTest2[0]?.points ?? `Did not play`;
 console.log(checkPoints2);
+
+/* ******** Looping Objects: Object Keys, Values, and Entries ******** */
+console.log(`-------Looping Objects: Object Keys, Values, and Entries-------`);
+
+const myOpeningHours = {
+  thu: {
+    open: 12,
+    close: 22,
+  },
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0,
+    close: 24,
+  },
+};
+
+// loops through keys
+const daysOpen = Object.keys(myOpeningHours);
+console.log(daysOpen);
+
+for (const day of daysOpen) {
+  console.log(day);
+}
+
+const timeOpen = Object.values(myOpeningHours);
+console.log(timeOpen);
+
+for (const times of timeOpen) {
+  console.log(times);
+}
+
+let openStr = `We are open ${daysOpen.length} days: `;
+
+for (const day of daysOpen) {
+  openStr += `${day} `;
+}
+console.log(openStr);
+
+// looping through values
+let timeStr = `Our opening times: `;
+for (const { open, close } of timeOpen) {
+  console.log(timeStr + `${open} to ${close} `);
+}
+
+// looping of both key and values
+const entries = Object.entries(myOpeningHours);
+
+for (const [day, { open, close }] of entries) {
+  console.log(`We are open on ${day} from ${open} to ${close}`);
+}
