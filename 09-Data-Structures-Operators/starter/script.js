@@ -646,3 +646,45 @@ for (const player of game.scored) {
   scorers[player] ? scorers[player]++ : (scorers[player] = 1);
 }
 console.log(scorers);
+
+/* ********  Sets  ******** */
+console.log(`------- Sets -------`);
+// Simple a set is a collection of unique values, removes duplicates. Set are also iterables
+const ordersSet = new Set([
+  'pasta',
+  'pizza',
+  'bakes',
+  'pasta',
+  'old down',
+  'pizza',
+  'saltfish',
+]);
+
+console.log(ordersSet);
+console.log(new Set('myName')); // removed duplicate 'm'
+console.log(ordersSet.size);
+console.log(ordersSet.has('pizza')); // return Boolean
+console.log(ordersSet.has('bread')); // return Boolean
+ordersSet.add('mongo');
+ordersSet.add('roti');
+console.log(ordersSet);
+ordersSet.delete('mongo');
+console.log(ordersSet);
+// ordersSet.clear() deletes all element of the set
+// there is no way of getting values out of a set this of the reason to still use array
+
+// looping through sets
+for (const order of ordersSet) {
+  console.log(order);
+}
+
+// the main use case for sets is to remove duplicates from array
+// example
+const roomTemps = [23, 34, 33, 20, 31, 23, 33, 35, 35, 20];
+
+const tempsUnique1 = new Set(roomTemps);
+const tempsUnique2 = [...new Set(roomTemps)]; // create an array from a set
+console.log(tempsUnique1);
+console.log(tempsUnique2);
+console.log(tempsUnique1.size);
+console.log(new Set('Simonprophet').size);
