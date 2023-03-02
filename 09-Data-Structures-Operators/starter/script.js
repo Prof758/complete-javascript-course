@@ -688,3 +688,48 @@ console.log(tempsUnique1);
 console.log(tempsUnique2);
 console.log(tempsUnique1.size);
 console.log(new Set('Simonprophet').size);
+
+/* ********  Maps: Fundamentals  ******** */
+console.log(`------- Maps: Fundamentals -------`);
+// a map is a data structure that we can use to map values to keys.Now, the big difference between objects and maps is that in maps, the keys can have any type
+
+const manUnited = new Map(); // this create a entry map
+// the fill the map you use the .set() w/ key and value pair to add data to the map. The set() also returns the map
+manUnited.set('manager', 'Ten Hag');
+manUnited.set(1, 'Team A');
+manUnited.set(2, 'Team B');
+console.log(manUnited.set(2, 'Team B'));
+
+// the set method actually returns the updated map and allows us to chain the set method
+manUnited
+  .set('Major Cups', 32)
+  .set(2023, 'Carabao Cup')
+  .set('players', ['rash', 'fred', 'general', 'De Gar'])
+  .set(true, 'won the PL')
+  .set(false, '2nd place');
+
+//n order to read data from a map we use the get() method w/ 'keyName'.
+
+console.log(manUnited.get(2023)); // output the value
+console.log(manUnited.get(true));
+
+// .has() ito check if a key is available
+console.log(manUnited.has('players')); // output true oe false
+
+manUnited.delete(2);
+
+// delete all element .clear()
+
+console.log(manUnited.size);
+
+//using an array as a ley
+
+const arrKey = [1, 2];
+manUnited.set(arrKey, 'testValue');
+console.log(manUnited.get(arrKey));
+
+console.log(manUnited);
+
+//this can be very useful with DOM elements which, in fact are also nothing more than just a special type of object.
+
+manUnited.set(document.querySelector('h1'), 'heading');
