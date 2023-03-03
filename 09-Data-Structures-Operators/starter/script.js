@@ -649,7 +649,8 @@ console.log(scorers);
 
 /* ********  Sets  ******** */
 console.log(`------- Sets -------`);
-// Simple a set is a collection of unique values, removes duplicates. Set are also iterables
+// Simple, a set is a collection of unique values, removes duplicates. Set are also iterables
+
 const ordersSet = new Set([
   'pasta',
   'pizza',
@@ -662,7 +663,7 @@ const ordersSet = new Set([
 
 console.log(ordersSet);
 console.log(new Set('myName')); // removed duplicate 'm'
-console.log(ordersSet.size);
+console.log(ordersSet.size); // works like length output the number of element
 console.log(ordersSet.has('pizza')); // return Boolean
 console.log(ordersSet.has('bread')); // return Boolean
 ordersSet.add('mongo');
@@ -670,11 +671,12 @@ ordersSet.add('roti');
 console.log(ordersSet);
 ordersSet.delete('mongo');
 console.log(ordersSet);
-// ordersSet.clear() deletes all element of the set
-// there is no way of getting values out of a set this of the reason to still use array
+// ordersSet.clear() deletes all elements of the set
+// there is no way of getting values out of a set this is a the reason to still use array
 
 // looping through sets
 for (const order of ordersSet) {
+  // same for of loop
   console.log(order);
 }
 
@@ -691,10 +693,11 @@ console.log(new Set('Simonprophet').size);
 
 /* ********  Maps: Fundamentals  ******** */
 console.log(`------- Maps: Fundamentals -------`);
-// a map is a data structure that we can use to map values to keys.Now, the big difference between objects and maps is that in maps, the keys can have any type
+// a map is a data structure that we can use to map values to keys. Now, the big difference between objects and maps is that in maps, the keys can have any type number boolean or string
 
 const manUnited = new Map(); // this create a entry map
-// the fill the map you use the .set() w/ key and value pair to add data to the map. The set() also returns the map
+
+// to fill the map you use the .set() w/ key and value pair to add data to the map. The set() also returns the map
 manUnited.set('manager', 'Ten Hag');
 manUnited.set(1, 'Team A');
 manUnited.set(2, 'Team B');
@@ -708,12 +711,12 @@ manUnited
   .set(true, 'won the PL')
   .set(false, '2nd place');
 
-//n order to read data from a map we use the get() method w/ 'keyName'.
+// in order to read data from a map we use the get() method w/ 'keyName'.
 
 console.log(manUnited.get(2023)); // output the value
 console.log(manUnited.get(true));
 
-// .has() ito check if a key is available
+// .has() is use to check if a key is available
 console.log(manUnited.has('players')); // output true oe false
 
 manUnited.delete(2);
@@ -722,7 +725,7 @@ manUnited.delete(2);
 
 console.log(manUnited.size);
 
-//using an array as a ley
+//using an array as a key
 
 const arrKey = [1, 2];
 manUnited.set(arrKey, 'testValue');
@@ -746,8 +749,10 @@ const question = new Map([
   ['correct', 1],
   [true, 'correct ans!'],
   [false, 'you mad or what'],
+  ['players', ['Tom', 'Peter', 'Andy']],
 ]);
 console.log(question);
+console.log(question.get('players'));
 
 //Both object and map have arrays in array. therefore a object can be change into a map
 
@@ -761,8 +766,10 @@ for (const [key, value] of question) {
     console.log(`Answer ${key}: ${value}`);
   }
 }
-console.log(`----- Quiz App -----`);
+
 // Quiz app
+console.log(`----- Quiz App -----`);
+
 console.log(question.get('question'));
 for (const [key, value] of question) {
   if (typeof key === 'number') {
@@ -782,3 +789,74 @@ console.log(`----- Quiz App End -----`);
 console.log([...question]);
 console.log([...question.keys()]);
 console.log([...question.values()]);
+
+/* ********  Coding Challenge num-3  ******** */
+console.log(`------- Coding Challenge num-3 -------`);
+/* 
+Let's continue with our football betting app! This time, we have a map with a log of the events that happened during the game. The values are the events themselves, and the keys are the minutes in which each event happened (a football game has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game has finished, is was found that the yellow card from minute 64 was unfair. So remove this event from the game events log.
+3. Print the following string to the console: "An event happened, on average, every 9 minutes" (keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking whether it's in the first half or second half (after 45 min) of the game, like this:
+      [FIRST HALF] 17: ⚽️ GOAL
+
+GOOD LUCK 😀
+*/
+
+const gameEvents = new Map([
+  [17, '⚽️ GOAL'],
+  [36, '🔁 Substitution'],
+  [47, '⚽️ GOAL'],
+  [61, '🔁 Substitution'],
+  [64, '🔶 Yellow card'],
+  [69, '🔴 Red card'],
+  [70, '🔁 Substitution'],
+  [72, '🔁 Substitution'],
+  [76, '⚽️ GOAL'],
+  [80, '⚽️ GOAL'],
+  [92, '🔶 Yellow card'],
+]);
+
+//1
+console.log(gameEvents.values());
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+// 2
+gameEvents.delete(64);
+console.log(gameEvents);
+
+//3
+
+console.log(
+  `An event happened, on average, every ${90 / gameEvents.size} minutes`
+);
+
+console.log(`----another way----`);
+const time = [...gameEvents.keys()].pop();
+console.log(
+  `An event happened, on average, every ${time / gameEvents.size} minutes`
+);
+
+// 4
+for (const [key, value] of gameEvents) {
+  if (key <= 45) {
+    console.log(`[FIRST HALF] ${key}: ${value}`);
+  } else console.log(`[SECOND HALF] ${key}: ${value}`);
+}
+
+console.log(`----- Conditional (ternary) operator -----`);
+for (const [key, value] of gameEvents) {
+  console.log(
+    key <= 45
+      ? `[FIRST HALF] ${key}: ${value}`
+      : `[SECOND HALF] ${key}: ${value}`
+  );
+}
+
+console.log(`----- Clean code -----`);
+for (const [min, event] of gameEvents) {
+  const half = min <= 45 ? `FIRST` : `SECOND`;
+  console.log(`[${half} HALF] ${min}: ${event}`);
+}
