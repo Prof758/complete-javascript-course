@@ -733,3 +733,52 @@ console.log(manUnited);
 //this can be very useful with DOM elements which, in fact are also nothing more than just a special type of object.
 
 manUnited.set(document.querySelector('h1'), 'heading');
+
+/* ********  Maps: Iteration  ******** */
+console.log(`------- Maps: Iteration -------`);
+
+// another way of creating a map
+const question = new Map([
+  ['question', 'Which is the best caribbean island ?'],
+  [1, 'Lucia'],
+  [2, 'Vincy'],
+  [3, 'Greenz'],
+  ['correct', 1],
+  [true, 'correct ans!'],
+  [false, 'you mad or what'],
+]);
+console.log(question);
+
+//Both object and map have arrays in array. therefore a object can be change into a map
+
+console.log(Object.entries(openingHours));
+const hourMap = new Map(Object.entries(openingHours));
+console.log(hourMap);
+
+// Iteration: looping through a Map()
+for (const [key, value] of question) {
+  if (typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+console.log(`----- Quiz App -----`);
+// Quiz app
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') {
+    console.log(`Answer ${key}: ${value}`);
+  }
+}
+// const answer = Number(prompt('Select your answer. '));
+let answer = 1;
+console.log(answer);
+
+// using the power of having boolean values as keys
+console.log(question.get(question.get('correct') === answer));
+
+console.log(`----- Quiz App End -----`);
+
+// convert a map to an array
+console.log([...question]);
+console.log([...question.keys()]);
+console.log([...question.values()]);
