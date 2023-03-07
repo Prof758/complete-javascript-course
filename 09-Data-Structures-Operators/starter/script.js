@@ -860,3 +860,162 @@ for (const [min, event] of gameEvents) {
   const half = min <= 45 ? `FIRST` : `SECOND`;
   console.log(`[${half} HALF] ${min}: ${event}`);
 }
+
+// Working With Strings - Part 1
+const airline = 'TAP Air Caribbean';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+console.log('B737'[0]);
+
+console.log(airline.length);
+console.log('B737'.length);
+
+console.log(airline.indexOf('a'));
+console.log(airline.lastIndexOf('a'));
+console.log(airline.indexOf('Caribbean'));
+
+console.log(airline.slice(4));
+console.log(airline.slice(4, 8));
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+console.log(airline.slice(-2));
+console.log(airline.slice(1, -1));
+
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') console.log('You got the middle seat 😬');
+  else console.log('You got lucky 😎');
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+// JS working in the background convey string into an object.
+console.log(new String('simon'));
+console.log(typeof new String('simon'));
+
+console.log(typeof new String('simon').slice(1));
+
+// Working With Strings - Part 2
+
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+// both doesn't require any arguments
+// can call directly on a string
+console.log('hello'.toUpperCase()); // return HELLO
+
+// used to fix capitalization errors
+const passengerNameInput = 'siMOn';
+const passengerLower = passengerNameInput.toLowerCase();
+const passengerName = passengerLower[0].toUpperCase() + passengerLower.slice(1);
+console.log(passengerName);
+
+// comparing emails
+const email = 'hello@simonlab.com';
+const loginemail = ' Hello@SimonLAb.com  \n';
+
+const conveyedEmail = loginemail.toLowerCase().trim();
+// string methods can be chained
+//trim() removes all the white space
+console.log(conveyedEmail);
+console.log(email === conveyedEmail); //to compare will returns true
+
+// to replace parts of a string
+// the replace method is also case sensitive.
+const priceGB = '£456,89';
+const priceUS = priceGB.replace('£', '$').replace(',', '.');
+console.log(priceUS);
+
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23';
+console.log(announcement.replaceAll('door', 'gate'));
+
+// use regular expression w/ replace
+console.log(announcement.replaceAll(/door/g, 'gate'));
+
+//Booleans
+const planeNew = 'Airbus A320neo';
+console.log(planeNew.includes('A320'));
+console.log(planeNew.includes('Boeing'));
+console.log(planeNew.startsWith('Airb'));
+
+if (planeNew.startsWith('Airbus') && planeNew.endsWith('neo')) {
+  console.log('Part of the NEW Airbus family');
+}
+
+// using includes() and toLowerCAse in a function
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are NOT allowed on board');
+  } else {
+    console.log('Welcome aboard!');
+  }
+};
+
+checkBaggage('I have a laptop, some Food and a pocket Knife');
+checkBaggage('Socks and camera');
+checkBaggage('Got some snacks and a gun for protection');
+
+// Working With Strings - Part 3
+
+// using the split(), will return an array
+
+console.log('we+are+here+to+stay'.split('+')); // ['we', 'are' ,'here', 'to', 'stay']
+console.log('Simon Prophet'.split(' ')); //['Simon', 'Prophet']
+
+const [firstNameSplit, lastNameSplit] = 'Simon Prophet'.split(' ');
+console.log(firstNameSplit, lastNameSplit);
+
+// using the join(). will return a string from an array of strings
+const userJoin = ['Mr', firstNameSplit, lastNameSplit];
+const newUser = userJoin.join(' ');
+console.log(newUser);
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for (const n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+  console.log(namesUpper.join(' '));
+};
+
+capitalizeName('jessica ann smith davis');
+capitalizeName('simon prophet');
+
+// Padding
+const message = 'Go to gate 23!';
+console.log(message.padStart(20, '+').padEnd(30, '+'));
+console.log('Jonas'.padStart(20, '+').padEnd(30, '+'));
+
+const maskCreditCard = function (number) {
+  const str = number + '';
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+
+console.log(maskCreditCard(64637836));
+console.log(maskCreditCard(43378463864647384));
+console.log(maskCreditCard('334859493847755774747'));
+
+// Repeat
+const message2 = 'Bad weather... All Departures Delayed... ';
+console.log(message2.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'🛩'.repeat(n)}`);
+};
+planesInLine(5);
+planesInLine(3);
+planesInLine(12);
