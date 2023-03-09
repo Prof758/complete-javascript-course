@@ -862,10 +862,11 @@ for (const [min, event] of gameEvents) {
 }
 
 // Working With Strings - Part 1
+console.log(`---- Working With Strings ----`);
 const airline = 'TAP Air Caribbean';
 const plane = 'A320';
 
-console.log(plane[0]);
+console.log(plane[0]); // output the value stored at index 0
 console.log(plane[1]);
 console.log(plane[2]);
 console.log('B737'[0]);
@@ -873,7 +874,7 @@ console.log('B737'[0]);
 console.log(airline.length);
 console.log('B737'.length);
 
-console.log(airline.indexOf('a'));
+console.log(airline.indexOf('a')); // first 'a' index will be output
 console.log(airline.lastIndexOf('a'));
 console.log(airline.indexOf('Caribbean'));
 
@@ -884,7 +885,7 @@ console.log(airline.slice(0, airline.indexOf(' ')));
 console.log(airline.slice(airline.lastIndexOf(' ') + 1));
 
 console.log(airline.slice(-2));
-console.log(airline.slice(1, -1));
+console.log(airline.slice(0, -1));
 
 const checkMiddleSeat = function (seat) {
   // B and E are middle seats
@@ -896,6 +897,7 @@ const checkMiddleSeat = function (seat) {
 checkMiddleSeat('11B');
 checkMiddleSeat('23C');
 checkMiddleSeat('3E');
+checkMiddleSeat('123B');
 
 // JS working in the background convey string into an object.
 console.log(new String('simon'));
@@ -908,17 +910,22 @@ console.log(typeof new String('simon').slice(1));
 console.log(airline.toLowerCase());
 console.log(airline.toUpperCase());
 // both doesn't require any arguments
+
 // can call directly on a string
-console.log('hello'.toUpperCase()); // return HELLO
+console.log('hello simon'.toUpperCase()); // return HELLO
 
 // used to fix capitalization errors
 const passengerNameInput = 'siMOn';
 const passengerLower = passengerNameInput.toLowerCase();
 const passengerName = passengerLower[0].toUpperCase() + passengerLower.slice(1);
+const anotherPassengerName = `${passengerLower[0].toUpperCase()}${passengerLower.slice(
+  1
+)}`;
 console.log(passengerName);
+console.log(anotherPassengerName);
 
 // comparing emails
-const email = 'hello@simonlab.com';
+const email = 'hello@simonlab.com'; // stored email
 const loginemail = ' Hello@SimonLAb.com  \n';
 
 const conveyedEmail = loginemail.toLowerCase().trim();
@@ -938,7 +945,7 @@ const announcement =
 console.log(announcement.replaceAll('door', 'gate'));
 
 // use regular expression w/ replace
-console.log(announcement.replaceAll(/door/g, 'gate'));
+console.log(announcement.replace(/door/g, 'gate'));
 
 //Booleans
 const planeNew = 'Airbus A320neo';
@@ -1002,7 +1009,7 @@ console.log('Jonas'.padStart(20, '+').padEnd(30, '+'));
 const maskCreditCard = function (number) {
   const str = number + '';
   const last = str.slice(-4);
-  return last.padStart(str.length, '*');
+  return last.padStart(str.length - 4, '*');
 };
 
 console.log(maskCreditCard(64637836));
@@ -1074,3 +1081,32 @@ document.querySelector('button').addEventListener('click', function () {
     console.log(`${output.padEnd(20)}${'✅'.repeat(i + 1)}`);
   }
 });
+
+// String Methods Practice
+
+const flightsData =
+  '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+
+// 🔴 Delayed Departure from FAO to TXL (11h25)
+//              Arrival from BRU to FAO (11h45)
+//   🔴 Delayed Arrival from HEL to FAO (12h05)
+//            Departure from FAO to LIS (12h30)
+
+const simpleCode = str => str.toUpperCase().slice(0, 3);
+// simple arrow function to edit airport code.
+
+const flightsInfo = function (data) {
+  const rows = data.split('+');
+  //console.log(rows);
+  for (const infoLine of rows) {
+    const [status, from, to, time] = infoLine.split(';');
+    const output = `${
+      status.startsWith('_Delayed') ? '🔴' : ''
+    } ${status.replaceAll('_', ' ')} from ${simpleCode(from)} to ${simpleCode(
+      to
+    )} (${time.replace(':', 'h')})`.padStart(60);
+    console.log(output);
+  }
+};
+
+flightsInfo(flightsData);
