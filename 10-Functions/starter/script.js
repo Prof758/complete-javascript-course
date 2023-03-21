@@ -56,3 +56,51 @@ console.log(simon);
 
 // ----- First-Class and Higher-Order Functions -------
 console.log(`--- First-Class and Higher-Order Functions ---`);
+// refer to course notes
+
+// Writing higher-order functions w/ callback function
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase();
+};
+
+const upperFirstWord = function (str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+};
+
+// High-order function
+const transformer = function (str, fn) {
+  console.log(`Original string: ${str}`);
+  console.log(`Transformed string: ${fn(str)}`);
+  console.log(`Transformed by ${fn.name}`);
+};
+
+transformer('SimonProphet can learn to code.', upperFirstWord);
+
+transformer('Consistent Hard Working WINS EVERYDAY', oneWord);
+
+// another example of high-order function using callback functions
+const hello = function () {
+  console.log(`Hi, I am Simon`);
+};
+
+document.body.addEventListener('click', hello);
+
+// functions returning functions
+console.log(`--- functions returning functions ---`);
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+const greetHey = greet('Hey');
+greetHey('Simon');
+greetHey('Prophet');
+
+greet('Hello')('Prophet');
+
+// using Arrow fn returning another fn
+const greetArr = greeting => name => console.log(`${greeting} ${name}`);
+
+greetArr('Hi')('Big Prof');
