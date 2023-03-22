@@ -104,3 +104,57 @@ greet('Hello')('Prophet');
 const greetArr = greeting => name => console.log(`${greeting} ${name}`);
 
 greetArr('Hi')('Big Prof');
+
+// The call and apply methods
+console.log(`--- The call and apply methods ---`);
+
+// airline object
+const airCaribbean = {
+  airline: 'Air Caribbean',
+  iataCode: 'AC',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+};
+
+airCaribbean.book(443, 'Simon Prophet');
+
+// sister airline
+const airLucia = {
+  airline: 'Air Saint Lucia',
+  iataCode: 'ALU',
+  bookings: [],
+};
+
+// you want airLucia to use the book function from airCaribbean
+
+const book = airCaribbean.book;
+// Could have been written:
+/* const book = function (flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name });
+  },
+  */
+
+// using the call function methods
+// the call method allows us to manually and explicitly set the this keyword to the first argument.
+book.call(airLucia, 758, 'Jev Broomes');
+console.log(airLucia);
+
+book.call(airCaribbean, 443, 'Cha Prophet');
+console.log(airCaribbean);
+
+// using the apply method
+// th apply method uses an array of data as the second argument
+const flightData = [446, 'Tom Paul'];
+book.apply(airLucia, flightData);
+console.log(airLucia);
+
+// with modern JS, we can use an array with the call method
+book.call(airCaribbean, ...flightData);
