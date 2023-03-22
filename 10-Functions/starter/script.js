@@ -158,3 +158,59 @@ console.log(airLucia);
 
 // with modern JS, we can use an array with the call method
 book.call(airCaribbean, ...flightData);
+
+// Bind method
+
+// same as call and apply but returns a new function where this keyword is bound and no longer need to specify
+
+const airVincy = {
+  airline: 'Air Saint Vincent',
+  iataCode: 'AVI',
+  bookings: [],
+};
+
+const bookAVI = book.bind(airVincy);
+const bookAC = book.bind(airCaribbean);
+const bookALU = book.bind(airLucia);
+
+bookAVI(787, 'Kewall Jacob-1');
+console.log(airVincy);
+bookAC(745, 'Kewall Jacob-2');
+bookALU(709, 'Kewall Jacob-3');
+
+// using the bind method basically specifying parts of the argument beforehand, is actually a common pattern called partial application. Partial application means that a part of the arguments of the original function are already applied, so which means, already set.
+
+// new vincy flight w/ flightNum 788 pre-set arguments
+const bookAVI788 = book.bind(airVincy, 788);
+bookAVI788('Iana Jacob');
+
+// using bind method with addEventListner
+
+airCaribbean.planes = 50;
+airCaribbean.buyPlane = function () {
+  this.planes++;
+  console.log(this.planes);
+};
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', airCaribbean.buyPlane.bind(airCaribbean));
+
+// Partial applications
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.25); // null if this was not used in function
+console.log(addVAT(150));
+console.log(addVAT(100));
+
+// refactor above using function returning a function
+const newTax = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const newVAT = newTax(0.25);
+console.log(newVAT(150));
+console.log(newVAT(100));
