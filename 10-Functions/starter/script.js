@@ -1,11 +1,12 @@
 'use strict';
+
 // ------ Default Parameters ------
 console.log(`------ Default Parameters ------`);
 
 const bookings = [];
 const createBooking = function (
   flightNum,
-  numPassengers = 1,
+  numPassengers = 1, // 1 is the default parameter for numPassengers
   price = 99.99 * numPassengers
 ) {
   const booking = {
@@ -88,6 +89,7 @@ document.body.addEventListener('click', hello);
 
 // functions returning functions
 console.log(`--- functions returning functions ---`);
+
 const greet = function (greeting) {
   return function (name) {
     console.log(`${greeting} ${name}`);
@@ -95,10 +97,10 @@ const greet = function (greeting) {
 };
 
 const greetHey = greet('Hey');
-greetHey('Simon');
+greetHey('Simon'); // output Hey Simon
 greetHey('Prophet');
 
-greet('Hello')('Prophet');
+greet('Hello')('Prophet'); // Hello argument of 1st fn Prophet argument of 2nd fn
 
 // using Arrow fn returning another fn
 const greetArr = greeting => name => console.log(`${greeting} ${name}`);
@@ -106,6 +108,7 @@ const greetArr = greeting => name => console.log(`${greeting} ${name}`);
 greetArr('Hi')('Big Prof');
 
 // -----The call and apply methods------
+// manually assigning this
 
 console.log(`--- The call and apply methods ---`);
 
@@ -152,8 +155,9 @@ console.log(airLucia);
 book.call(airCaribbean, 443, 'Cha Prophet');
 console.log(airCaribbean);
 
-// using the apply method
-// th apply method uses an array of data as the second argument
+// ----- using the apply method-----
+
+// the apply method uses an array of data as the second argument
 const flightData = [446, 'Tom Paul'];
 book.apply(airLucia, flightData);
 console.log(airLucia);
@@ -161,7 +165,7 @@ console.log(airLucia);
 // with modern JS, we can use an array with the call method
 book.call(airCaribbean, ...flightData);
 
-// Bind method
+// ---------- Bind method ---------------
 
 // same as call and apply but returns a new function where this keyword is bound and no longer need to specify
 
@@ -189,6 +193,7 @@ bookAVI788('Iana Jacob');
 // using bind method with addEventListner
 
 airCaribbean.planes = 50;
+console.log(airCaribbean);
 airCaribbean.buyPlane = function () {
   this.planes++;
   console.log(this.planes);
@@ -265,10 +270,11 @@ const poll = {
     /* typeof answer === 'number' &&
       answer < this.answers.length &&
       this.answers[answer]++; */
-    if (userAnswer >= 0 && userAnswer <= 3) {
-      this.answers[userAnswer] += 1;
+    if (userAnswer >= 0 && userAnswer <= this.answers.length) {
+      this.answers[userAnswer]++;
       //console.log(this.answers);
-    } else console.log(`Select a number between 0 and 3`);
+    } else console.log(`Select a number between 0 and ${this.answers.length}`);
+
     this.displayResults();
     this.displayResults('string');
   },
