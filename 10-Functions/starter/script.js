@@ -223,7 +223,7 @@ console.log(newVAT(150));
 console.log(newVAT(100));
 
 // Coding Challenge #1
-
+console.log(`---- Coding Challenge #1 ------`);
 /* 
 Let's build a simple poll app!
 
@@ -298,3 +298,29 @@ poll.displayResults.call({ answers: DATA1 }, 'string');
 poll.displayResults.call({ answers: DATA1 });
 poll.displayResults.call({ answers: DATA2 }, 'string');
 poll.displayResults.call({ answers: DATA2 });
+
+// ----------Immediately Invoked Function Expressions (IIFE) ------------
+
+console.log(`---- Immediately Invoked Function Expressions (IIFE) ------`);
+
+// we need a function that is only executed once. And then never again.So basically a function that disappears right after it's called once.
+
+(function () {
+  console.log(`fn run only once`);
+})();
+
+(() => console.log(`Arrow fn run only once`))();
+
+// Therefore, we say that all data defined inside a scope is private. We also say that this data is encapsulated. example: const usePassword = 12345 below; So many times we actually need to protect our variables, from being accidentally over written by some other parts of the program or even with external scripts or libraries.
+
+(function () {
+  console.log(`fn w/ private defined variable run only once`);
+  const usePassword = 12345;
+})();
+
+// Variables declared with let or const create their own scope inside a block and are private. when declared with var is the opposite.
+
+{
+  const isPrivate = ` private variable `;
+  var notPrivate = `have access`;
+}
