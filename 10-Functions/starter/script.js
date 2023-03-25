@@ -324,3 +324,77 @@ console.log(`---- Immediately Invoked Function Expressions (IIFE) ------`);
   const isPrivate = ` private variable `;
   var notPrivate = `have access`;
 }
+
+// ---------- Closures ------------
+
+console.log(`---- Closures ------`);
+
+// --- NOTE -----
+// we don't create closures manually, a closure simply happens automatically in certain situations, we just need to recognize those situations.
+// --------------
+
+// So a function always has access to the variable environment of the execution context in which it was created,even after a debt execution context is gone. And this last part is really important. The closure is then basically this variable environment attached to the function, exactly as it was at the time and place that the function was created.
+
+let passengerCount = 0; // in global scope
+
+const secureBooking = function () {
+  let passengerCount = 2; // booker parent scope
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+
+booker(); // will update variable of in parent scope but not global scope.
+booker(); // if variable is not in parent scope it will update global scope.
+booker();
+
+console.dir(booker);
+
+// another definition a function has a backpack, which it carries around wherever it goes. And this backpack contains all the variables that were present in the environment in which the function was created. Then whenever a variable can't be found in the function scope, JavaScript will look into the backpack and take the missing variable from there.
+
+// --- more Closuresgit  examples ---
+
+// Example 1
+
+let f; // declared in the global scope
+
+const g = function () {
+  const a = 5;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+g(); // when g() is re-assigns to fn in g()
+f(); // execute f in the global scope
+
+const h = function () {
+  const b = 10;
+  f = function () {
+    console.log(b * 3);
+  };
+};
+
+h(); // same as above
+f(); // same as above
+
+// Example 1
+
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are boarding all ${n} passengers`);
+    console.log(
+      `There are 3 groups, each with ${Math.trunc(perGroup)} passengers`
+    );
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+boardPassengers(196, 5);
