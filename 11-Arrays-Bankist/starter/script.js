@@ -125,3 +125,79 @@ console.log(arrAt.at(-1)); // can be use to chain multiple methods together.
 // AT method used with springs
 console.log('simon'.at(0));
 console.log('simon'.at(-1));
+
+// Looping Array forEach
+// You cannot use break in a forEach loop
+
+const accStatement = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// for of LOOP
+console.log(`------ for of Loop --------`);
+for (const acc of accStatement) {
+  if (acc > 0) {
+    console.log(`Deposit ${acc}`);
+  } else {
+    console.log(`Withdrawn ${Math.abs(acc)}`);
+  }
+}
+
+// forEach Loop
+console.log(`------ forEach Loop --------`);
+accStatement.forEach(function (acc) {
+  if (acc > 0) {
+    console.log(`Deposit ${acc}`);
+  } else {
+    console.log(`Withdrawn ${Math.abs(acc)}`);
+  }
+});
+
+// for of loop w/index
+console.log(`------ for of Loop w/index --------`);
+for (const [i, acc] of accStatement.entries()) {
+  // [i, acc] i = index, acc = current element
+  if (acc > 0) {
+    console.log(`Statement ${i + 1}: Deposit ${acc}`);
+  } else {
+    console.log(`Statement ${i + 1}: Withdrawn ${Math.abs(acc)}`);
+  }
+}
+
+// forEach Loop w/index
+console.log(`------ forEach Loop w/index --------`);
+accStatement.forEach(function (acc, i, arr) {
+  // current element, index, entire array in the function.
+  // console.log(`${arr}`);
+  if (acc > 0) {
+    console.log(`Statement ${i + 1}: Deposit ${acc}`);
+  } else {
+    console.log(`Statement ${i + 1}: Withdrawn ${Math.abs(acc)}`);
+  }
+});
+
+console.log(`------ forEach working Maps and Sets --------`);
+// forEach working Maps and Sets
+// maps are key, value pairs
+
+// below is an array of array
+const currenciesMap = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+// using forEach on a Maps
+
+currenciesMap.forEach(function (value, key, map) {
+  console.log(`KEY-${key}: VALUE-${value}`);
+  //console.log(map);
+});
+
+const names = ['simon', 'tim', 'peter', 'bob', 'tim', 'paul', 'simon'];
+const namesSet = new Set(names);
+console.log(namesSet);
+
+//forEach Loop w/Sets
+namesSet.forEach(function (value, key, set) {
+  // sets do not have keys, so the value is assigned to the key.
+  console.log(`KEY-${key}: VALUE-${value}`);
+});
