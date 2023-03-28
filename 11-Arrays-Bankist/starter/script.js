@@ -426,6 +426,8 @@ TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
 GOOD LUCK 😀
 */
 
+// ----- MY SOLUTION --------
+console.log(`----- MY SOLUTION --------`);
 const calcAverageHumanAge = function (age) {
   const humanAge = age
     .map(function (dogAge, i, arr) {
@@ -441,6 +443,39 @@ const calcAverageHumanAge = function (age) {
     .reduce(function (acc, age, i, arr) {
       return acc + age / arr.length;
     }, 0);
+  console.log(humanAge);
+};
+
+calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]); // 44
+calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]); // 47.33333
+// ----------------------------
+// CSE SOLUTION ---------------
+console.log(`CSE SOLUTION ---------------`);
+const calcAverageHumanAgeCSE = function (ages) {
+  const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+  const adults = humanAges.filter(age => age >= 18);
+  console.log(humanAges);
+  console.log(adults);
+
+  // const average = adults.reduce((acc, age) => acc + age, 0) / adults.length;
+
+  const average = adults.reduce(
+    (acc, age, i, arr) => acc + age / arr.length,
+    0
+  );
+
+  return average;
+};
+const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+
+// MY SOLUTION W/ cleaner code ---------
+console.log(`MY SOLUTION W/ cleaner code ---------`);
+const calcAverageHumanAgeCC = function (age) {
+  const humanAge = age
+    .map((dogAge, i, arr) => (dogAge <= 2 ? dogAge * 2 : 16 + dogAge * 4))
+    .filter(age => age > 18)
+    .reduce((acc, age, i, arr) => acc + age / arr.length, 0);
   console.log(humanAge);
 };
 
