@@ -341,3 +341,25 @@ const username = user
   }) // returns an array ['s', 's', 'p']
   .join(''); // returns a string 'ssp'
 console.log(username);
+
+// ------ FILTER METHOD ---------
+console.log(movements); // [200, 450, -400, 3000, -650, -130, 70, 1300]
+
+const deposit = movements.filter(function (mov) {
+  return mov > 0;
+});
+console.log(deposit); // [200, 450, 3000, 70, 1300]
+
+// rewrite as arrow fn
+const depositArFn = movements.filter(mov => mov > 0);
+console.log(depositArFn); // [200, 450, 3000, 70, 1300]
+
+// withdrawal
+
+const withdrawal = movements.filter(function (mov) {
+  return mov < 0;
+});
+console.log(withdrawal);
+
+const withdrawalArFn = movements.filter(mov => mov < 0);
+console.log(withdrawalArFn);
