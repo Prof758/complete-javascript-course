@@ -82,6 +82,7 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+// Creating the USERNAMES
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -94,6 +95,16 @@ const createUsernames = function (accs) {
 
 createUsernames(accounts);
 // console.log(accounts);
+
+// Display Balance on BANKIST App
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce(function (acc, mov) {
+    return acc + mov;
+  }, 0);
+  labelBalance.textContent = `£${balance}`;
+};
+
+calcDisplayBalance(account1.movements);
 
 ///////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -284,6 +295,7 @@ checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
 console.log(`----- Data Transformations: Map, filter, reduce methods -----`);
 
 // ------ MAP METHOD ---------
+console.log(`------ MAP METHOD ---------`);
 // use to loop over an array unlike forEach it will return a new array. map does not mutate the original array
 
 const dataGBP = [9, 16, 6, 8, 3];
@@ -343,6 +355,7 @@ const username = user
 console.log(username);
 
 // ------ FILTER METHOD ---------
+console.log(`------ FILTER METHOD ---------`);
 console.log(movements); // [200, 450, -400, 3000, -650, -130, 70, 1300]
 
 const deposit = movements.filter(function (mov) {
@@ -359,7 +372,38 @@ console.log(depositArFn); // [200, 450, 3000, 70, 1300]
 const withdrawal = movements.filter(function (mov) {
   return mov < 0;
 });
-console.log(withdrawal);
+console.log(withdrawal); // [-400, -650, -130]
 
 const withdrawalArFn = movements.filter(mov => mov < 0);
-console.log(withdrawalArFn);
+console.log(withdrawalArFn); // [-400, -650, -130]
+
+// ------ REDUCE  METHOD ---------
+console.log(`------ REDUCE  METHOD ---------`);
+// use the reduce method to essentially boil down all the elements in an array to one single value
+// in the reduce method the function ha 4 parameters accumulator, current element, index, arr
+// arr.reduce(function(acc, cur, i, arr){}, 0) acc is specified at the end of the fn.
+
+const balance = movements.reduce(function (acc, mov, i, arr) {
+  console.log(`Iteration ${i + 1}: ${acc}`);
+  return acc + mov;
+}, 0);
+console.log(balance);
+
+// finding max value in array
+
+const max = movements.reduce(function (acc, mov) {
+  if (acc > mov) {
+    return acc;
+  } else {
+    return mov;
+  }
+}, movements[0]); // when finding max and min start with first element of array.
+
+console.log(max);
+
+// rewrite as arrow fn
+const maxArFn = movements.reduce(
+  (acc, mov) => (acc > mov ? acc : mov),
+  movements[0] // when finding max and min start with first element of array.
+);
+console.log(maxArFn);
