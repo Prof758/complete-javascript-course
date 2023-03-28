@@ -266,3 +266,51 @@ const KateData = [4, 1, 15, 8, 3];
 
 checkDogs(JuliaData, KateData);
 checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
+
+// ----- Data Transformations: map, filter, reduce methods -----
+console.log(`----- Data Transformations: Map, filter, reduce methods -----`);
+
+// ------ MAP METHOD ---------
+// use to loop over an array unlike forEach it will return a new array. map does not mutate the original array
+
+const dataGBP = [9, 16, 6, 8, 3];
+const gbpToUSD = 1.1;
+
+const dataUSD = dataGBP.map(function (data) {
+  return data * gbpToUSD;
+});
+console.log(dataUSD);
+
+// using arrow function to rewrite above
+const dataUSDArrow = dataGBP.map(data => data * gbpToUSD);
+console.log(dataUSDArrow);
+
+console.log(dataGBP); // original array is not mutated.
+
+// using a for of loop to create the above
+const dataUSDFor = [];
+for (const data of dataGBP) {
+  //const usd = data * gbpToUSD;
+  //dataUSDFor.push(usd);
+  dataUSDFor.push(data * gbpToUSD);
+}
+console.log(dataUSDFor);
+/* --------------------------------- */
+
+// the map method has access to the same parameters as forEach (current element, index, whole array)
+
+const statements = movements.map(function (mov, i) {
+  if (mov > 0) {
+    return `Statement ${i + 1}: Deposit ${mov}`;
+  } else {
+    return `Statement ${i + 1}: Withdrawn ${Math.abs(mov)}`;
+  }
+});
+console.log(statements);
+
+// functional programming. writing the above code cleaner w/ arrow function and conditional statement
+const statementsFP = movements.map(
+  (mov, i) =>
+    `Statement ${i + 1}: ${mov > 0 ? 'Deposit' : 'Withdrawn'} £${Math.abs(mov)}`
+);
+console.log(statementsFP);
