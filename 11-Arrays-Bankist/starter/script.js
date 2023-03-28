@@ -82,6 +82,19 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+
+createUsernames(accounts);
+// console.log(accounts);
+
 ///////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -314,3 +327,17 @@ const statementsFP = movements.map(
     `Statement ${i + 1}: ${mov > 0 ? 'Deposit' : 'Withdrawn'} £${Math.abs(mov)}`
 );
 console.log(statementsFP);
+
+// creating username using map nad forEach for Bankist App
+
+// basic principle
+const user = 'Simon Shan Prophet';
+const username = user
+  .toLowerCase()
+  .split(' ') // returns an array ['simon', 'shan', 'prophet']
+  .map(function (name) {
+    // as arrow fn .map( name => name[0])
+    return name[0];
+  }) // returns an array ['s', 's', 'p']
+  .join(''); // returns a string 'ssp'
+console.log(username);
