@@ -106,6 +106,27 @@ const calcDisplayBalance = function (movements) {
 
 calcDisplayBalance(account1.movements);
 
+const calcDisplaySummary = function (movements) {
+  const deposit = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `£${deposit}`;
+
+  const withdrawal = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `£${Math.abs(withdrawal)}`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter(i => i >= 1)
+    .reduce((acc, mov, i, arr) => acc + mov, 0);
+  labelSumInterest.textContent = `£${interest}`;
+};
+
+calcDisplaySummary(account1.movements);
+
 ///////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -470,7 +491,17 @@ const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
 // MY SOLUTION W/ cleaner code ---------
-console.log(`MY SOLUTION W/ cleaner code ---------`);
+// coding challenge 3
+/* 
+Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this time as an arrow function, and using chaining!
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+*/
+
+console.log(`MY SOLUTION W/ cleaner code coding challenge 3---------`);
 const calcAverageHumanAgeCC = function (age) {
   const humanAge = age
     .map((dogAge, i, arr) => (dogAge <= 2 ? dogAge * 2 : 16 + dogAge * 4))
@@ -481,3 +512,13 @@ const calcAverageHumanAgeCC = function (age) {
 
 calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]); // 44
 calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]); // 47.33333
+
+// ---- Chaining Methods -----
+console.log(`---- Chaining Methods ----- `);
+
+console.log(movements);
+const totalDepositUSD = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * gbpToUSD)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositUSD);
