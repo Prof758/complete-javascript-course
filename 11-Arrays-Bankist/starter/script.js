@@ -524,3 +524,26 @@ const totalDepositUSD = movements
   .map(mov => mov * gbpToUSD)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(totalDepositUSD);
+
+// ----- find Method ------
+console.log(`----- find Method ------`);
+// use the Find method to retrieve one element of an array based on a condition, it will only returns the first element that meets the condition.
+
+console.log(movements);
+
+const firstWithdrawal = movements.find(function (mov) {
+  return mov < 0;
+});
+
+// arrow: const firstWithdrawal = movements.find( mov => mov < 0);
+console.log(firstWithdrawal);
+
+// Real world example: using .find on an object in the array based on some property of that object to return exactly one element.
+
+console.log(accounts);
+
+const userSmith = accounts.find(function (acc) {
+  return acc.owner === 'Sarah Smith';
+});
+
+console.log(userSmith);
