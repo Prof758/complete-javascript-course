@@ -63,6 +63,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 // BUILDING OUT BANKIST APP
 
+// displaying deposits and withdrawals
 const displayMovements = function (movements) {
   containerMovements.innerHTML = ' ';
   movements.forEach(function (mov, i) {
@@ -176,7 +177,7 @@ console.log([...arr, ...arr2]);
 // JOIN
 console.log(letters.join(' - ')); // returns a string
 
-// at method
+// .at method
 // new method that can be used on array and strings
 
 const arrAt = [24, 45, 76];
@@ -188,7 +189,7 @@ console.log(arrAt[arrAt.length - 1]);
 console.log(arrAt.slice(-1)[0]);
 console.log(arrAt.at(-1)); // can be use to chain multiple methods together.
 
-// AT method used with springs
+//.at method used with springs
 console.log('simon'.at(0));
 console.log('simon'.at(-1));
 
@@ -401,7 +402,7 @@ console.log(withdrawalArFn); // [-400, -650, -130]
 // ------ REDUCE  METHOD ---------
 console.log(`------ REDUCE  METHOD ---------`);
 // use the reduce method to essentially boil down all the elements in an array to one single value
-// in the reduce method the function ha 4 parameters accumulator, current element, index, arr
+// in the reduce method the function has 4 parameters accumulator, current element, index, arr
 // arr.reduce(function(acc, cur, i, arr){}, 0) acc is specified at the end of the fn.
 
 const balance = movements.reduce(function (acc, mov, i, arr) {
@@ -470,7 +471,8 @@ const calcAverageHumanAge = function (age) {
 calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]); // 44
 calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]); // 47.33333
 // ----------------------------
-// CSE SOLUTION ---------------
+
+// ------ CSE SOLUTION --------
 console.log(`CSE SOLUTION ---------------`);
 const calcAverageHumanAgeCSE = function (ages) {
   const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
