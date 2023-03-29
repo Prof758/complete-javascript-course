@@ -35,6 +35,8 @@ const account4 = {
 
 const accounts = [account1, account2, account3, account4];
 
+console.log(`------ BANKIST APP CODE ---------`);
+
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
@@ -81,9 +83,8 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
-
 // Creating the USERNAMES
+
 const createUsernames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -98,6 +99,7 @@ createUsernames(accounts);
 // console.log(accounts);
 
 // Display Balance on BANKIST App
+
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce(function (acc, mov) {
     return acc + mov;
@@ -105,30 +107,64 @@ const calcDisplayBalance = function (movements) {
   labelBalance.textContent = `£${balance}`;
 };
 
-calcDisplayBalance(account1.movements);
+// Display Summary
 
-const calcDisplaySummary = function (movements) {
-  const deposit = movements
+const calcDisplaySummary = function (acc) {
+  const deposit = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumIn.textContent = `£${deposit}`;
 
-  const withdrawal = movements
+  const withdrawal = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
   labelSumOut.textContent = `£${Math.abs(withdrawal)}`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
+    .map(deposit => (deposit * acc.interestRate) / 100)
     .filter(i => i >= 1)
     .reduce((acc, mov, i, arr) => acc + mov, 0);
   labelSumInterest.textContent = `£${interest}`;
 };
 
-calcDisplaySummary(account1.movements);
+// LOGIN Event handler
+
+let currentUser;
+
+btnLogin.addEventListener('click', function (e) {
+  // to prevent the form from submitting
+  e.preventDefault();
+  //console.log(`we in`);
+
+  currentUser = accounts.find(acc => acc.username === inputLoginUsername.value); // use of .find
+  // console.log(currentUser);
+
+  if (currentUser?.pin === Number(inputLoginPin.value)) {
+    // optional chaining
+    //Display UI and welcome text
+    labelWelcome.textContent = `Welcome back, ${
+      currentUser.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+
+    // clear input form
+    inputLoginPin.value = inputLoginUsername.value = '';
+    inputLoginPin.blur();
+
+    //Display movements
+    displayMovements(currentUser.movements);
+
+    //Display Balance
+    calcDisplayBalance(currentUser.movements);
+
+    // Display Summary
+    calcDisplaySummary(currentUser);
+  }
+});
 
 ///////////////////////////////////////////////
+console.log(`------ BANKIST APP CODE ---------`);
 /////////////////////////////////////////////////
 // LECTURES
 
