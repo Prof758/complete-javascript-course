@@ -206,6 +206,24 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+// LOAN BTN
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const loanAmount = Number(inputLoanAmount.value);
+
+  if (
+    loanAmount > 0 &&
+    currentUser.movements.some(function (mov) {
+      return mov >= loanAmount * 0.1;
+    })
+  ) {
+    currentUser.movements.push(loanAmount);
+    updateUI(currentUser);
+  }
+  inputLoanAmount.value = '';
+});
+
 // DELETE Or CLOSE ACCOUNT
 
 btnClose.addEventListener('click', function (e) {
@@ -665,3 +683,44 @@ const dataPoint = catData.findIndex(function (i) {
 });
 
 console.log(dataPoint); // return 2
+
+// The SOME and EVERY Method
+// the some method tests for a condition, instead of testing for equality like the includes method
+
+console.log(movements);
+
+// CHECKING FOR EQUALITY
+console.log(movements.includes(70)); // true
+
+// SOME METHOD CHECKING IF A CONDITION EXIST
+const depositsMore500 = movements.some(function (mov) {
+  return mov > 500;
+  // movements.some(mov => mov > 0)
+});
+
+console.log(depositsMore500); // return a boolean value. this time it is true.
+
+// EVERY METHOD
+// only returns true if all of the elements in the array satisfy the condition
+const allDeposits = movements.every(function (mov) {
+  return mov > 500;
+  // movements.every(mov => mov > 0)
+});
+console.log(allDeposits);
+
+console.log(
+  account4.movements.every(function (mov) {
+    return mov > 0;
+  })
+  // account4.movements.every(mov => mov > 0)
+);
+
+// DRY principle
+const depositFn = function (mov) {
+  // mov => mov > 0
+  return mov > 0;
+};
+
+console.log(movements.some(depositFn));
+console.log(movements.every(depositFn));
+console.log(movements.filter(depositFn));
