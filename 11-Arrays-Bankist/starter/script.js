@@ -206,6 +206,31 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    // check user is correct
+    currentUser.username === inputCloseUsername.value &&
+    // check if pin is correct
+    currentUser.pin === Number(inputClosePin.value)
+  ) {
+    //console.log(`OUT`);
+    // to find account idex
+    const index = accounts.findIndex(function (acc) {
+      return currentUser.username === acc.username;
+    });
+    // delete account
+    accounts.splice(index, 1);
+    //console.log(`And you're OUT`);
+    // Hide UI
+    containerApp.style.opacity = 0;
+    // reset Welcome
+    labelWelcome.textContent = `Log in to get started`;
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
+});
+
 ///////////////////////////////////////////////
 console.log(`------ BANKIST APP CODE ---------`);
 /////////////////////////////////////////////////
@@ -626,3 +651,6 @@ const userSmith = accounts.find(function (acc) {
 });
 
 console.log(userSmith);
+
+// The findIndex Method
+// Returns the index of the found element and not the element itself.
