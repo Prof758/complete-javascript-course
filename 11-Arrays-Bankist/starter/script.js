@@ -107,11 +107,11 @@ createUsernames(accounts);
 
 // Display Balance on BANKIST App
 
-const calcDisplayBalance = function (movements) {
-  const balance = movements.reduce(function (acc, mov) {
+const calcDisplayBalance = function (acc) {
+  acc.balance = acc.movements.reduce(function (acc, mov) {
     return acc + mov;
   }, 0);
-  labelBalance.textContent = `£${balance}`;
+  labelBalance.textContent = `£${acc.balance}`;
 };
 
 // Display Summary
@@ -137,7 +137,21 @@ const calcDisplaySummary = function (acc) {
 
 // LOGIN Event handler
 
+// track current user account
 let currentUser;
+
+// UPDATE handler
+
+const updateUI = function (acc) {
+  //Display movements
+  displayMovements(acc.movements);
+
+  //Display Balance
+  calcDisplayBalance(acc);
+
+  // Display Summary
+  calcDisplaySummary(acc);
+};
 
 btnLogin.addEventListener('click', function (e) {
   // to prevent the form from submitting
@@ -148,25 +162,47 @@ btnLogin.addEventListener('click', function (e) {
   // console.log(currentUser);
 
   if (currentUser?.pin === Number(inputLoginPin.value)) {
-    // above optional chaining
+    // above ? optional chaining
     //Display UI and welcome text
     labelWelcome.textContent = `Welcome back, ${
       currentUser.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 100;
 
+    // updateUI
+    updateUI(currentUser);
+
     // clear input form
     inputLoginPin.value = inputLoginUsername.value = '';
     inputLoginPin.blur();
+  }
+});
 
-    //Display movements
-    displayMovements(currentUser.movements);
+// TRANSFER
 
-    //Display Balance
-    calcDisplayBalance(currentUser.movements);
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputTransferAmount.value);
+  const receiverAcc = accounts.find(
+    acc => acc.username === inputTransferTo.value
+  );
+  // console.log(amount, receiverAcc);
 
-    // Display Summary
-    calcDisplaySummary(currentUser);
+  // clear input fields
+  inputTransferTo.value = inputTransferAmount.value = '';
+  inputTransferAmount.blur();
+  if (
+    amount > 0 &&
+    receiverAcc &&
+    currentUser.balance >= amount &&
+    receiverAcc?.username !== currentUser.username
+  ) {
+    // making transfer
+    currentUser.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+
+    // updateUI
+    updateUI(currentUser);
   }
 });
 
