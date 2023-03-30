@@ -33,7 +33,14 @@ const account4 = {
   pin: 4444,
 };
 
-const accounts = [account1, account2, account3, account4];
+const account5 = {
+  owner: 'Simon Prophet',
+  movements: [1430, 1000, 1700, 250, 990],
+  interestRate: 2.3,
+  pin: 5555,
+};
+
+const accounts = [account1, account2, account3, account4, account5];
 
 console.log(`------ BANKIST APP CODE ---------`);
 
@@ -65,7 +72,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 // BUILDING OUT BANKIST APP
 
-// displaying deposits and withdrawals
+// DISPLAY MOVEMENTS - accounts deposits and withdrawals
 const displayMovements = function (movements) {
   containerMovements.innerHTML = ' ';
   movements.forEach(function (mov, i) {
@@ -125,7 +132,7 @@ const calcDisplaySummary = function (acc) {
     .map(deposit => (deposit * acc.interestRate) / 100)
     .filter(i => i >= 1)
     .reduce((acc, mov, i, arr) => acc + mov, 0);
-  labelSumInterest.textContent = `£${interest}`;
+  labelSumInterest.textContent = `£${interest.toFixed(2)}`;
 };
 
 // LOGIN Event handler
@@ -141,7 +148,7 @@ btnLogin.addEventListener('click', function (e) {
   // console.log(currentUser);
 
   if (currentUser?.pin === Number(inputLoginPin.value)) {
-    // optional chaining
+    // above optional chaining
     //Display UI and welcome text
     labelWelcome.textContent = `Welcome back, ${
       currentUser.owner.split(' ')[0]
