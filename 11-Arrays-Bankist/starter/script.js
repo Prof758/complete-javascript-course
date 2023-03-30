@@ -206,6 +206,8 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+// DELETE Or CLOSE ACCOUNT
+
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -654,3 +656,12 @@ console.log(userSmith);
 
 // The findIndex Method
 // Returns the index of the found element and not the element itself.
+const catData = [2, 4, 8, 9];
+
+const dataPoint = catData.findIndex(function (i) {
+  if (i === 8) {
+    return i;
+  }
+});
+
+console.log(dataPoint); // return 2
