@@ -73,9 +73,14 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // BUILDING OUT BANKIST APP
 
 // DISPLAY MOVEMENTS - accounts deposits and withdrawals
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = ' ';
-  movements.forEach(function (mov, i) {
+
+  const sortMovements = sort
+    ? movements.slice().sort((a, b) => a - b)
+    : movements;
+
+  sortMovements.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = ` 
     <div class="movements__row">
@@ -251,8 +256,18 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
+// Sorting account movements
+
+let sortedState = false;
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault;
+  displayMovements(currentUser.movements, !sortedState);
+  sortedState = !sortedState;
+});
+
 ///////////////////////////////////////////////
-console.log(`------ BANKIST APP CODE ---------`);
+console.log(`------ BANKIST APP CODE END ---------`);
 /////////////////////////////////////////////////
 // LECTURES
 
@@ -752,3 +767,32 @@ const allBalance2 = accounts
   .reduce((acc, mov) => acc + mov, 0); // calculate total
 
 console.log(allBalance2); // output 23210 total same as above
+
+// SORTING ARRAY SORT METHODS
+
+// w/string
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners);
+console.log(owners.sort());
+console.log(owners); // the sort method mutated the original array
+
+// w/numbers
+console.log(movements);
+movements.sort();
+console.log(movements);
+// this does not sort number out and treat numbers as strings
+
+//array of numbers using the sort() method, you can simply call the method on the array and pass in a comparison function as a parameter. This function defines the sorting order and returns a negative value if the first argument should be sorted before the second argument, a positive value if the second argument should be sorted before the first argument, or zero if they have the same sort order.
+
+// ascending order
+let numbers = [5, 2, 10, 1, 7];
+numbers.sort(function (a, b) {
+  return a - b;
+});
+console.log(numbers); // [1, 2, 5, 7, 10]
+
+// descending order
+numbers.sort(function (a, b) {
+  return b - a;
+});
+console.log(numbers); // [10, 7, 5, 2, 1]
