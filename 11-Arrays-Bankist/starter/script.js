@@ -724,3 +724,31 @@ const depositFn = function (mov) {
 console.log(movements.some(depositFn));
 console.log(movements.every(depositFn));
 console.log(movements.filter(depositFn));
+
+// FLAT AND FLATMAP METHODS
+// flat method takes nested arrays and creates one array
+
+const arrNest = [[1, 2, 3], [4, 5, 6], 7, 8, 9];
+const arrFlat = arrNest.flat();
+console.log(arrFlat);
+
+const arrDeepNest = [[[1, 2], 3], [4, [5, 6]], 7, [8, 9]];
+const arrFlatDeep = arrDeepNest.flat(2); // goes 2 levels deep
+console.log(arrFlatDeep);
+
+// Calculating All movements for bankist App w/ flat
+
+const allBalance1 = accounts
+  .map(acc => acc.movements) // array of all movements from accounts
+  .flat() // create one array from all movements
+  .reduce((acc, mov) => acc + mov, 0); // calculate total
+
+console.log(allBalance1); // output 23210 total
+
+// FLATMAP
+// this combine the logic of map and flat into one method. only goes one level deep
+const allBalance2 = accounts
+  .flatMap(acc => acc.movements) // array of all movements from accounts and create one array
+  .reduce((acc, mov) => acc + mov, 0); // calculate total
+
+console.log(allBalance2); // output 23210 total same as above
