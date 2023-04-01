@@ -796,3 +796,46 @@ numbers.sort(function (a, b) {
   return b - a;
 });
 console.log(numbers); // [10, 7, 5, 2, 1]
+
+// More Ways of Creating and Filling Arrays
+
+const makeArr1 = [1, 2, 3, 4, 5, 6, 7];
+const makeArr2 = new Array(1, 2, 3, 4, 5, 6, 7);
+console.log(makeArr2); // [1,2,3,4,5,6,7]
+
+// generate an array by how to programmatically create and fill arrays
+
+const x = new Array(7); //pass in one argument, then it creates a new empty argument with that length
+console.log(x); // [empty × 7] creates an entry array
+
+// FILL METHOD .fill()
+// one method that we can call on this empty array and that is the fill() method.
+// .fill() will mutate the original array and can work with all arrays
+
+x.fill(1);
+console.log(x); // [1, 1, 1, 1, 1, 1, 1]
+
+x.fill(2, 2, 5); // will the array fill in 2 from index 2 until index 4, index 5 is the stop point
+console.log(x); //[1, 1, 2, 2, 2, 1, 1]
+
+// FROM METHOD .from()
+// in order to create arrays from array like structures like Strings, Maps or Sets, they are all Iterables
+// using it on the Array() constructor
+
+// first argument is a object with the length property
+// second argument is a mapping function.
+
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y); // [1, 1, 1, 1, 1, 1, 1]
+
+const z = Array.from({ length: 7 }, (cur, i) => i + 1);
+console.log(z); // [1, 2, 3, 4, 5, 6, 7]
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent)
+  );
+  console.log(movementsUI);
+});
+// RECAP: We used a Array.from() to create an array from the result of the querySelectorAll() which is a NodeList, which is not really an array, but an array like structure and that array like structure can easily be converted to an array using Array.from(). And then as a second step, we even included a mapping function, which then forms that initial array to an array exactly as we want it. So basically converting the raw element to its text content
