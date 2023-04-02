@@ -741,6 +741,7 @@ console.log(movements.every(depositFn));
 console.log(movements.filter(depositFn));
 
 // FLAT AND FLATMAP METHODS
+
 // flat method takes nested arrays and creates one array
 
 const arrNest = [[1, 2, 3], [4, 5, 6], 7, 8, 9];
@@ -761,6 +762,7 @@ const allBalance1 = accounts
 console.log(allBalance1); // output 23210 total
 
 // FLATMAP
+
 // this combine the logic of map and flat into one method. only goes one level deep
 const allBalance2 = accounts
   .flatMap(acc => acc.movements) // array of all movements from accounts and create one array
@@ -839,3 +841,90 @@ labelBalance.addEventListener('click', function () {
   console.log(movementsUI);
 });
 // RECAP: We used a Array.from() to create an array from the result of the querySelectorAll() which is a NodeList, which is not really an array, but an array like structure and that array like structure can easily be converted to an array using Array.from(). And then as a second step, we even included a mapping function, which then forms that initial array to an array exactly as we want it. So basically converting the raw element to its text content
+
+// Array Methods Practice
+
+// 1. how much has been deposited in total in the bank in all the accounts across the bank
+const bankDepositsTotal = accounts
+  // .map(function (acc) {
+  //   return acc.movements;
+  // })
+  // .flat()
+  .flatMap(function (acc) {
+    return acc.movements;
+  })
+  .filter(function (mov) {
+    return mov > 0;
+  })
+  .reduce(function (acc, mov) {
+    return acc + mov;
+  }, 0);
+
+console.log(bankDepositsTotal);
+
+// 2. count how many deposits there have been in the bank with at least $1,000.
+
+const oneGrantDeposit1 = accounts
+  .flatMap(function (acc) {
+    return acc.movements;
+  })
+  .filter(function (mov) {
+    return mov >= 1000;
+  }).length;
+
+console.log(oneGrantDeposit1);
+
+const oneGrantDeposit2 = accounts
+  .flatMap(function (acc) {
+    return acc.movements;
+  })
+  .reduce(function (acc, mov) {
+    if (mov >= 1000) {
+      return acc + 1;
+    } else {
+      return acc;
+    }
+  }, 0);
+// .reduce(acc, mov) => (mov >= 1000 ? acc + 1: acc), 0
+
+console.log(oneGrantDeposit2);
+
+// 3 the goal is to create an object which contains the sum of the deposits and of the withdrawals.
+
+const objectSums = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    function (acc, mov) {
+      if (mov > 0) {
+        acc.deposit += mov;
+      } else {
+        acc.withdrawal += mov;
+      }
+      return acc;
+    },
+    { deposit: 0, withdrawal: 0 }
+  );
+// .reduce( (acc, mov) =>  {(mov > 0 ) ?  acc.deposit += mov : acc.withdrawal += mov), return acc}, { deposit: 0, withdrawal: 0 }
+// Rewrite : (mov > 0 ) ?  acc.deposit += mov : acc.withdrawal += mov) === acc[mov > 0 ? 'deposit' : 'withdrawal'] += mov
+console.log(objectSums);
+
+// 4 create a simple function to convert any string to a title case
+// This Is a Nice Title
+const test1 = 'this is a nice title';
+const test2 = 'three grand extra PER month a year';
+
+const convertTitleCase = function (title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+  return capitalize(titleCase);
+};
+
+console.log(convertTitleCase(test1));
+console.log(convertTitleCase(test2));
