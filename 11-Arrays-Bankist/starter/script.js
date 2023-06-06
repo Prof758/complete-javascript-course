@@ -99,21 +99,29 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // BUILDING OUT BANKIST APP
 
 // DISPLAY MOVEMENTS - accounts deposits and withdrawals
-const displayMovements = function (movements, sort = false) {
+const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = ' ';
 
   const sortMovements = sort
-    ? movements.slice().sort((a, b) => a - b)
-    : movements;
+    ? acc.movements.slice().sort((a, b) => a - b)
+    : acc.movements;
 
   sortMovements.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const date = new Date(acc.movementsDates[i]);
+    const day = `${date.getDate()}`.padStart(2, 0);
+    const mth = `${date.getMonth() + 1}`.padStart(2, 0);
+    const year = date.getFullYear();
+
+    const displayDate = `${day}/${mth}/${year}`;
+
     const html = ` 
     <div class="movements__row">
           <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-          <div class="movements__date">3 days ago</div>
+          <div class="movements__date">${displayDate}</div>
           <div class="movements__value">£${mov.toFixed(2)}</div>
     </div>
     `;
@@ -168,14 +176,11 @@ const calcDisplaySummary = function (acc) {
 
 // LOGIN Event handler
 
-// track current user account
-let currentUser;
-
 // UPDATE handler
 
 const updateUI = function (acc) {
   //Display movements
-  displayMovements(acc.movements);
+  displayMovements(acc);
 
   //Display Balance
   calcDisplayBalance(acc);
@@ -183,6 +188,24 @@ const updateUI = function (acc) {
   // Display Summary
   calcDisplaySummary(acc);
 };
+
+// track current user account
+let currentUser;
+
+// FAKE ALWAYS LOG IN
+currentUser = account1;
+updateUI(currentUser);
+containerApp.style.opacity = 100;
+
+// Current balance date and time
+const now = new Date();
+const day = `${now.getDate()}`.padStart(2, 0);
+const mth = `${now.getMonth() + 1}`.padStart(2, 0);
+const year = now.getFullYear();
+const hour = `${now.getHours()}`.padStart(2, 0);
+const min = `${now.getMinutes()}`.padStart(2, 0);
+
+labelDate.textContent = `${day}/${mth}/${year}, ${hour}:${min}`;
 
 btnLogin.addEventListener('click', function (e) {
   // to prevent the form from submitting
@@ -232,6 +255,10 @@ btnTransfer.addEventListener('click', function (e) {
     currentUser.movements.push(-amount);
     receiverAcc.movements.push(amount);
 
+    // add transfer date
+    currentUser.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
+
     // updateUI
     updateUI(currentUser);
   }
@@ -250,6 +277,11 @@ btnLoan.addEventListener('click', function (e) {
     })
   ) {
     currentUser.movements.push(loanAmount);
+
+    // add loan date
+    currentUser.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
+
     updateUI(currentUser);
   }
   inputLoanAmount.value = '';
@@ -288,7 +320,7 @@ let sortedState = false;
 
 btnSort.addEventListener('click', function (e) {
   e.preventDefault;
-  displayMovements(currentUser.movements, !sortedState);
+  displayMovements(currentUser.acc.movements, !sortedState);
   sortedState = !sortedState;
 });
 
