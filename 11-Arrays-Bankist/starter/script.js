@@ -122,7 +122,7 @@ const displayMovements = function (acc, sort = false) {
       i + 1
     } ${type}</div>
           <div class="movements__date">${displayDate}</div>
-          <div class="movements__value">£${mov.toFixed(2)}</div>
+          <div class="movements__value">${mov.toFixed(2)}£</div>
     </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -159,19 +159,19 @@ const calcDisplaySummary = function (acc) {
   const deposit = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `£${deposit.toFixed(2)}`;
+  labelSumIn.textContent = `${deposit.toFixed(2)}£`;
 
   const withdrawal = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `£${Math.abs(withdrawal).toFixed(2)}`;
+  labelSumOut.textContent = `${Math.abs(withdrawal).toFixed(2)}£`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
     .map(deposit => (deposit * acc.interestRate) / 100)
     .filter(i => i >= 1)
     .reduce((acc, mov, i, arr) => acc + mov, 0);
-  labelSumInterest.textContent = `£${interest.toFixed(2)}`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}£`;
 };
 
 // LOGIN Event handler
