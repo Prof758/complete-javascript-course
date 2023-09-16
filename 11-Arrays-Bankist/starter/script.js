@@ -193,9 +193,9 @@ const updateUI = function (acc) {
 let currentUser;
 
 // FAKE ALWAYS LOG IN
-currentUser = account1;
-updateUI(currentUser);
-containerApp.style.opacity = 100;
+// currentUser = account1;
+// updateUI(currentUser);
+// containerApp.style.opacity = 100;
 
 // Current balance date and time
 const now = new Date();
@@ -222,6 +222,14 @@ btnLogin.addEventListener('click', function (e) {
       currentUser.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 100;
+
+    // create current date and time
+    const now = new Date();
+    const day = `${now.getDate()}`.padStart(2, 0);
+    const mth = `${now.getMonth() + 1}`.padStart(2, 0);
+    const year = now.getFullYear();
+    const hour = `${now.getHours()}`.padStart(2, 0);
+    const min = `${now.getMinutes()}`.padStart(2, 0);
 
     // updateUI
     updateUI(currentUser);
@@ -280,7 +288,6 @@ btnLoan.addEventListener('click', function (e) {
 
     // add loan date
     currentUser.movementsDates.push(new Date().toISOString());
-    receiverAcc.movementsDates.push(new Date().toISOString());
 
     updateUI(currentUser);
   }
