@@ -484,3 +484,43 @@ console.log(
   'Locate Browser:  ',
   Intl.NumberFormat(navigator.language, optionsNumTest).format(numTest2)
 );
+
+// Timers: setTimeout and setInterval
+console.log('--- Timers: setTimeout and setInterval ----');
+// creates a delay before running a function.
+
+// simple setTimeout
+
+setTimeout(() => console.log('Here is your pizza '), 3000);
+console.log('JS keeps running after reading setTimeout');
+
+// setTimeout w/ arguments
+setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}`),
+  3500,
+  'ham',
+  'onions'
+);
+
+// cancel a setTimeout w/ clearTimeout
+
+const ingredients = ['ham', 'onions'];
+
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}`),
+  3500,
+  ...ingredients
+);
+
+if (ingredients.includes('ham')) clearTimeout(pizzaTimer);
+
+// setInterval
+// repeat a function at a set interval (time)
+
+setInterval(function () {
+  const now = new Date();
+  const hour = `${now.getHours()}`.padStart(2, 0);
+  const min = `${now.getMinutes()}`.padStart(2, 0);
+  const sec = `${now.getSeconds()}`.padStart(2, 0);
+  //console.log(`${hour}:${min}:${sec}`);
+}, 1000);

@@ -382,12 +382,14 @@ btnLoan.addEventListener('click', function (e) {
       return mov >= loanAmount * 0.1;
     })
   ) {
-    currentUser.movements.push(loanAmount);
+    setTimeout(function () {
+      currentUser.movements.push(loanAmount);
 
-    // add loan date
-    currentUser.movementsDates.push(new Date().toISOString());
+      // add loan date
+      currentUser.movementsDates.push(new Date().toISOString());
 
-    updateUI(currentUser);
+      updateUI(currentUser);
+    }, 3000);
   }
   inputLoanAmount.value = '';
 });
