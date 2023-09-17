@@ -100,7 +100,7 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 // function
 
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
@@ -110,11 +110,12 @@ const formatMovementDate = function (date) {
   if (daysPassed === 1) return 'Yesterday';
   if (daysPassed <= 7) return `${daysPassed} days ago`;
   else {
-    const day = `${date.getDate()}`.padStart(2, 0);
-    const mth = `${date.getMonth() + 1}`.padStart(2, 0);
-    const year = date.getFullYear();
+    // const day = `${date.getDate()}`.padStart(2, 0);
+    // const mth = `${date.getMonth() + 1}`.padStart(2, 0);
+    // const year = date.getFullYear();
 
-    return `${day}/${mth}/${year}`;
+    // return `${day}/${mth}/${year}`;
+    return Intl.DateTimeFormat(locale).format(date);
   }
 };
 
@@ -130,7 +131,7 @@ const displayMovements = function (acc, sort = false) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const date = new Date(acc.movementsDates[i]);
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.locale);
 
     const html = ` 
     <div class="movements__row">
@@ -240,12 +241,32 @@ btnLogin.addEventListener('click', function (e) {
     containerApp.style.opacity = 100;
 
     // create current date and time
+    // const now = new Date();
+    // const day = `${now.getDate()}`.padStart(2, 0);
+    // const mth = `${now.getMonth() + 1}`.padStart(2, 0);
+    // const year = now.getFullYear();
+    // const hour = `${now.getHours()}`.padStart(2, 0);
+    // const min = `${now.getMinutes()}`.padStart(2, 0);
+
     const now = new Date();
-    const day = `${now.getDate()}`.padStart(2, 0);
-    const mth = `${now.getMonth() + 1}`.padStart(2, 0);
-    const year = now.getFullYear();
-    const hour = `${now.getHours()}`.padStart(2, 0);
-    const min = `${now.getMinutes()}`.padStart(2, 0);
+
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'short',
+      year: '2-digit',
+      weekday: 'short',
+    };
+
+    //location data from the browser
+    const locale = navigator.language;
+    // location from code data
+    const userLocale = currentUser.locale;
+
+    labelDate.textContent = new Intl.DateTimeFormat(userLocale, options).format(
+      now
+    );
 
     // updateUI
     updateUI(currentUser);

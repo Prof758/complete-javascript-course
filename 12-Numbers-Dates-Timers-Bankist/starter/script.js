@@ -431,3 +431,21 @@ const daysPassed = calcDaysPassed(
 );
 
 console.log(daysPassed);
+
+// ****** Internationalizing Dates (Intl) *****
+
+const nowTest = new Date();
+
+const options = {
+  hour: 'numeric',
+  minute: 'numeric',
+  day: 'numeric',
+  month: 'long',
+  year: '2-digit',
+  weekday: 'short',
+};
+
+//locate data from the browser
+const locale = navigator.language;
+
+labelDate.textContent = new Intl.DateTimeFormat(locale, options).format(now);
