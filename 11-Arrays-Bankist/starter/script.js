@@ -82,7 +82,7 @@ const account4 = {
     '2023-09-15T10:51:36.790Z',
   ],
   currency: 'GBP',
-  locale: 'en-GB', // de-DE
+  locale: 'en-GB',
 };
 
 const account5 = {
@@ -163,6 +163,39 @@ const formatCurrent = function (value, locale, currency) {
     style: 'currency',
     currency: currency,
   }).format(value);
+};
+
+const startLogoutTimer = function () {
+  const tick = function () {
+    // each call update UI
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(Math.trunc(time % 60)).padStart(2, 0);
+    labelTimer.textContent = `${min}:${sec}`;
+
+    // when timer hit 0
+    if (time === 0) {
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.opacity = 0;
+    }
+
+    // decrease by 1
+    time--;
+  };
+  //set time to 5 mins
+  let time = 300;
+
+  // call the timer every sec
+  tick();
+
+  const timer = setInterval(tick, 1000);
+
+  return timer;
+  // so that you can clear and reset
+};
+
+const resetTimer = function () {
+  clearInterval(timer);
+  timer = startLogoutTimer();
 };
 
 // DISPLAY MOVEMENTS - accounts deposits and withdrawals
@@ -267,8 +300,8 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
-// track current user account
-let currentUser;
+// track current user account and timer
+let currentUser, timer;
 
 // FAKE ALWAYS LOG IN
 // currentUser = account1;
@@ -332,6 +365,10 @@ btnLogin.addEventListener('click', function (e) {
     // updateUI
     updateUI(currentUser);
 
+    // start and reset timer
+    if (timer) clearInterval(timer);
+    timer = startLogoutTimer();
+
     // clear input form
     inputLoginPin.value = inputLoginUsername.value = '';
     inputLoginPin.blur();
@@ -367,6 +404,8 @@ btnTransfer.addEventListener('click', function (e) {
 
     // updateUI
     updateUI(currentUser);
+
+    resetTimer();
   }
 });
 
@@ -392,6 +431,8 @@ btnLoan.addEventListener('click', function (e) {
     }, 3000);
   }
   inputLoanAmount.value = '';
+
+  resetTimer();
 });
 
 // DELETE Or CLOSE ACCOUNT
@@ -426,7 +467,7 @@ btnClose.addEventListener('click', function (e) {
 let sortedState = false;
 
 btnSort.addEventListener('click', function (e) {
-  e.preventDefault;
+  e.preventDefault();
   displayMovements(currentUser.acc.movements, !sortedState);
   sortedState = !sortedState;
 });
