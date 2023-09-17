@@ -447,5 +447,40 @@ const options = {
 
 //locate data from the browser
 const locale = navigator.language;
+console.log(locale);
+// console.log(navigator.userAgentData);
 
 labelDate.textContent = new Intl.DateTimeFormat(locale, options).format(now);
+
+// Internationalizing Numbers (Intl)
+console.log('--- Internationalizing Numbers (Intl) ----');
+
+const numTest1 = 5783927.67;
+
+console.log('US:  ', Intl.NumberFormat('en-US').format(numTest1));
+console.log('Germany:  ', Intl.NumberFormat('de-DE').format(numTest1));
+console.log(
+  'Locate Browser:  ',
+  Intl.NumberFormat(navigator.language).format(numTest1)
+);
+const numTest2 = 32783927.85;
+// more info on options at mozilla
+const optionsNumTest = {
+  style: 'currency',
+  //unit: 'celsius',
+  currency: 'EUR', // has to be set manually
+  // useGrouping: false
+};
+
+console.log(
+  'US:  ',
+  Intl.NumberFormat('en-US', optionsNumTest).format(numTest2)
+);
+console.log(
+  'Germany:  ',
+  Intl.NumberFormat('de-DE', optionsNumTest).format(numTest2)
+);
+console.log(
+  'Locate Browser:  ',
+  Intl.NumberFormat(navigator.language, optionsNumTest).format(numTest2)
+);

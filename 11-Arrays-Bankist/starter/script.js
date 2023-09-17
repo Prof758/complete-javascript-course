@@ -81,7 +81,7 @@ const account4 = {
     '2023-09-14T23:36:17.929Z',
     '2023-09-15T10:51:36.790Z',
   ],
-  currency: 'EUR',
+  currency: 'GBP',
   locale: 'en-GB', // de-DE
 };
 
@@ -101,7 +101,7 @@ const account5 = {
     '2023-08-14T23:36:17.929Z',
     '2023-08-15T10:51:36.790Z',
   ],
-  currency: 'EUR',
+  currency: 'GBP',
   locale: 'en-GB',
 };
 
@@ -158,6 +158,13 @@ const formatMovementDate = function (date, locale) {
   }
 };
 
+const formatCurrent = function (value, locale, currency) {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(value);
+};
+
 // DISPLAY MOVEMENTS - accounts deposits and withdrawals
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = ' ';
@@ -172,13 +179,15 @@ const displayMovements = function (acc, sort = false) {
     const date = new Date(acc.movementsDates[i]);
     const displayDate = formatMovementDate(date, acc.locale);
 
+    const formattedMov = formatCurrent(mov, acc.locale, acc.currency);
+
     const html = ` 
     <div class="movements__row">
           <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
           <div class="movements__date">${displayDate}</div>
-          <div class="movements__value">${mov.toFixed(2)}£</div>
+          <div class="movements__value">${formattedMov}</div>
     </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -206,7 +215,12 @@ const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce(function (acc, mov) {
     return acc + mov;
   }, 0);
-  labelBalance.textContent = `£${acc.balance.toFixed(2)}`;
+
+  labelBalance.textContent = formatCurrent(
+    acc.balance,
+    acc.locale,
+    acc.currency
+  );
 };
 
 // Display Summary
@@ -215,19 +229,27 @@ const calcDisplaySummary = function (acc) {
   const deposit = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${deposit.toFixed(2)}£`;
+  labelSumIn.textContent = formatCurrent(deposit, acc.locale, acc.currency);
 
   const withdrawal = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(withdrawal).toFixed(2)}£`;
+  labelSumOut.textContent = formatCurrent(
+    Math.abs(withdrawal),
+    acc.locale,
+    acc.currency
+  );
 
   const interest = acc.movements
     .filter(mov => mov > 0)
     .map(deposit => (deposit * acc.interestRate) / 100)
     .filter(i => i >= 1)
     .reduce((acc, mov, i, arr) => acc + mov, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}£`;
+  labelSumInterest.textContent = formatCurrent(
+    interest,
+    acc.locale,
+    acc.currency
+  );
 };
 
 // LOGIN Event handler
