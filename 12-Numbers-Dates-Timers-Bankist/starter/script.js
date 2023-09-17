@@ -413,3 +413,21 @@ console.log(Date.now()); // get current time stamp
 
 future.setFullYear(2040);
 console.log(future);
+
+//Operations With Dates
+
+// finding the difference between two dates
+const futureDate = new Date(2027, 10, 24, 15, 23);
+console.log(+futureDate); // converted to a number
+
+// simple fn that takes two date and finds difference
+
+const calcDaysPassed = (date1, date2) =>
+  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+
+const daysPassed = calcDaysPassed(
+  new Date(2027, 10, 24),
+  new Date(2027, 10, 4)
+);
+
+console.log(daysPassed);
