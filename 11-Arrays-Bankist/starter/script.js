@@ -428,7 +428,7 @@ btnLoan.addEventListener('click', function (e) {
       currentUser.movementsDates.push(new Date().toISOString());
 
       updateUI(currentUser);
-    }, 3000);
+    }, 2000);
   }
   inputLoanAmount.value = '';
 
@@ -464,12 +464,13 @@ btnClose.addEventListener('click', function (e) {
 
 // Sorting account movements
 
-let sortedState = false;
+let sorted = false;
 
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  displayMovements(currentUser.acc.movements, !sortedState);
-  sortedState = !sortedState;
+  console.log(currentUser);
+  displayMovements(currentUser.movements, !sorted);
+  sorted = !sorted;
 });
 
 ///////////////////////////////////////////////
