@@ -81,3 +81,61 @@ const cookieBtn = document.querySelector('.btn--close--cookie');
 cookieBtn.addEventListener('click', () => {
   cookieText.remove();
 });
+
+///////////////////////////////////////////
+//Styles, Attributes and Classes
+console.log('*** Styles, Attributes and Classes ***');
+///////////////////////////////////////////
+
+// Styles
+// setting style inside script.js
+cookieText.style.backgroundColor = '#37383d';
+cookieText.style.width = '120%';
+
+// to find the style set inside css file
+console.log(getComputedStyle(cookieText).color);
+console.log(getComputedStyle(cookieText).height);
+
+// can use that info to update styles
+cookieText.style.height =
+  Number.parseFloat(getComputedStyle(cookieText).height) + 30 + 'px';
+
+// setProperty can use to set the style for any element
+
+document.documentElement.style.setProperty('--color-primary', '#B1901E');
+
+// Attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className);
+
+// set attributes
+logo.alt = 'minimalist logo';
+
+//Non-standard attributes
+console.log(logo.designer);
+
+// set and reading non-standard
+logo.setAttribute('designer', 'SP Labs');
+console.log(logo.getAttribute('designer'));
+
+// absolute and relative attributes
+console.log(logo.src); // absolute
+console.log(logo.getAttribute('src')); // relative mainly need this one
+
+// this is the same for links
+const link = document.querySelector('.nav__link--btn');
+console.log(link.href); // absolute
+console.log(link.getAttribute('href')); // relative
+
+//Data attributes
+console.log(logo.dataset.versionNumber);
+// this is used to get data from the HTML
+
+// Classes
+
+logo.classList.add('test');
+logo.classList.remove('test');
+logo.classList.toggle('test');
+logo.classList.contains('test');
