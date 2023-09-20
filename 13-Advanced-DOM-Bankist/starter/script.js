@@ -7,6 +7,8 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnLearnMore = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -33,6 +35,36 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
+// Implementing Smooth Scrolling
+
+btnLearnMore.addEventListener('click', e => {
+  // old method
+
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+
+  console.log(e.target.getBoundingClientRect());
+
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+
+  console.log(
+    'height/width viewport',
+    document.documentElement.clientHeight,
+    document.documentElement.clientWidth
+  );
+
+  window.scrollTo({
+    left: s1coords.left + window.pageXOffset,
+    top: s1coords.top + window.pageYOffset,
+    behavior: 'smooth',
+  });
+
+  // new browser method
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+///////////////////////////////////////////
+// ***** LESSONS *****
 ///////////////////////////////////////////
 //Selecting, Creating, and Deleting Elements
 console.log('*** Selecting, Creating, and Deleting Elements ***');
