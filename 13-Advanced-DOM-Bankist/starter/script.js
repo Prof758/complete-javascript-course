@@ -171,3 +171,28 @@ logo.classList.add('test');
 logo.classList.remove('test');
 logo.classList.toggle('test');
 logo.classList.contains('test');
+
+// Types of Events and Event Handlers
+
+// addEventListener method
+//1. it let you to add multiple event to a element.
+//2. remove an event listener
+
+const h1 = document.querySelector('h1');
+
+const h1Alert = function (e) {
+  alert(`We in the building `);
+
+  // h1.removeEventListener('mouseenter', h1Alert);
+};
+
+h1.addEventListener('mouseenter', h1Alert);
+
+// removing a event listener w/ setTimeout
+setTimeout(() => h1.removeEventListener('mouseenter', h1Alert), 3000);
+
+// old method using on event
+
+// h1.onmouseenter = function (e) {
+//   alert(`We in the building too`);
+// };
