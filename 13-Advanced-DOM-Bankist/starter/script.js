@@ -196,3 +196,42 @@ setTimeout(() => h1.removeEventListener('mouseenter', h1Alert), 3000);
 // h1.onmouseenter = function (e) {
 //   alert(`We in the building too`);
 // };
+
+// Event Propagation: Bubbling and Capturing
+
+// create a random color
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK', e.target, e.currentTarget);
+
+  console.log(e.currentTarget === this);
+
+  // to stop propagation
+  //e.stopPropagation();
+});
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('LINK CONTAINER', e.target, e.currentTarget);
+});
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+  console.log('NAV', e.target, e.currentTarget);
+});
+
+document.querySelector('body').addEventListener(
+  'click',
+  function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('BODY', e.target, e.currentTarget);
+  },
+  true // catches the event in the capturing phase
+);
