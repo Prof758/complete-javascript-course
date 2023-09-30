@@ -64,6 +64,7 @@ btnLearnMore.addEventListener('click', e => {
 });
 
 // Page navigation
+
 // Older method
 // document.querySelectorAll('.nav__link').forEach(function(el)){
 //   el.addEventListener('click', function(e){
@@ -75,17 +76,15 @@ btnLearnMore.addEventListener('click', e => {
 
 // page scroll  using Event Delegation: Implementing Page Navigation
 // this method uses e.target and addEventListener on the parent element
-document
-  .querySelectorAll('.nav__links')
-  .addEventListener('click', function (e) {
-    e.preventDefault();
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
 
-    //Matching strategy
-    if (e.target.classList.contains('nav__link')) {
-      const id = e.target.getAttribute('href');
-      document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-    }
-  });
+  //Matching strategy
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
 
 ///////////////////////////////////////////
 // ***** LESSONS *****
@@ -259,3 +258,40 @@ document.querySelector('body').addEventListener(
   },
   true // catches the event in the capturing phase
 );
+
+// DOM Traversing
+
+const h1DOM = document.querySelector('h1');
+
+// Going downwards: selecting children element
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.childNodes[0]);
+console.log(h1.children);
+console.log(h1.children[0]);
+h1DOM.firstElementChild.style.color = 'orangered';
+h1DOM.lastElementChild.style.color = 'white';
+
+// going upwards: from child to parent element
+console.log(h1DOM.parentNode);
+console.log(h1DOM.parentElement);
+
+h1DOM.closest('.header').style.background = 'var(--gradient-secondary)';
+h1DOM.closest('h1').style.background = 'var(--gradient-primary)';
+
+// going sideways: selecting siblings
+console.log(h1DOM.previousElementSibling); // null no element before it
+console.log(h1DOM.nextElementSibling);
+
+console.log(h1DOM.previousSibling);
+console.log(h1DOM.nextSibling);
+
+const headerDOM = h1DOM.parentElement.children; // HTML collection
+console.log(headerDOM);
+console.log([...headerDOM]); // spreading the collection into an array
+[...headerDOM].forEach(function (el) {
+  // allow you to loop over it
+  if (el !== h1DOM) {
+    el.style.transform = 'scale(1.5)';
+  }
+});
