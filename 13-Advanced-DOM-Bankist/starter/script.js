@@ -136,6 +136,21 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 
 nav.addEventListener('mouseout', handleHover.bind(1));
 
+// Implementing a sticky nav The Scroll event
+// by adding the sticky class
+// this method is really bad for performance
+// to find sticky nav start point
+const initialCoords = section1.getBoundingClientRect();
+
+window.addEventListener('scroll', function () {
+  console.log(window.scrollY);
+  if (window.scrollY > initialCoords.top) {
+    nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
+  }
+});
+
 ///////////////////////////////////////////
 // ***** LESSONS *****
 ///////////////////////////////////////////
