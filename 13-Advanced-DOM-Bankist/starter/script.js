@@ -266,6 +266,14 @@ const prevSlide = function () {
 btnRight.addEventListener('click', nextSlide);
 btnLeft.addEventListener('click', prevSlide);
 
+// Using keys on the slider
+
+document.addEventListener('keydown', function (e) {
+  console.log(e);
+  if (e.key === 'ArrowLeft') prevSlide();
+  if (e.key === 'ArrowRight') nextSlide();
+});
+
 ///////////////////////////////////////////
 // ***** LESSONS *****
 ///////////////////////////////////////////
