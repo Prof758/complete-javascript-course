@@ -548,7 +548,7 @@ console.log('*** Selecting, Creating, and Deleting Elements ***');
 // const observer = new IntersectionObserver(obsCallback, obsOptions);
 // observer.observe(section2);
 
-// DOm Content Loaded checks HMTL and JS is loaded
+// DOM Content Loaded checks HMTL and JS is loaded
 
 document.addEventListener('DOMContentLoaded', function (e) {
   console.log('content loaded', e);
