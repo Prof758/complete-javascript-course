@@ -37,3 +37,28 @@ console.log(simon.player);
 
 console.log(simon.__proto__); // Person.__proto__
 console.log(simon.__proto__.__proto__); // Object.__proto__ Top of prototype chair
+
+// Coding Challenge #1
+
+const Car = function (carMake, carSpeed) {
+  (this.carMake = carMake), (this.carSpeed = carSpeed);
+};
+
+Car.prototype.accel = function () {
+  console.log(`${(this.carSpeed += 10)}Km/h`);
+};
+
+Car.prototype.brake = function () {
+  console.log(`${(this.carSpeed -= 5)}Km/h`);
+};
+
+const carOne = new Car('BMW', 120);
+const carTwo = new Car('Mercedes', 95);
+
+console.log(carOne, carTwo);
+
+carOne.brake();
+carOne.accel();
+carTwo.brake();
+carTwo.accel();
+/////////////////
