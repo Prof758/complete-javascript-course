@@ -32,3 +32,8 @@ simon.calcAge();
 
 Person.prototype.player = 'Power forward';
 console.log(simon.player);
+
+// Prototypal Inheritance on Built-In Objects
+
+console.log(simon.__proto__); // Person.__proto__
+console.log(simon.__proto__.__proto__); // Object.__proto__ Top of prototype chair
