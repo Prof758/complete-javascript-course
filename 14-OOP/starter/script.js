@@ -156,3 +156,44 @@ paul.init('Paul', 2020);
 
 console.log(paul);
 paul.calcAge();
+
+// Coding Challenge #2
+
+class CarCl {
+  constructor(carMake, carSpeed) {
+    (this.carMake = carMake), (this.carSpeed = carSpeed);
+  }
+
+  accel() {
+    console.log(`${(this.carSpeed += 10)}Km/h`);
+  }
+
+  brake() {
+    console.log(`${(this.carSpeed -= 5)}Km/h`);
+  }
+  get speedUS() {
+    return `${this.carSpeed / 1.6}mi/h`;
+  }
+
+  set speedUS(speed) {
+    this.carSpeed = speed * 1.6;
+  }
+}
+
+const bmw = new CarCl('BMW', 120);
+const mercedes = new CarCl('Mercedes', 95);
+const ford = new CarCl('Ford', 120);
+console.log(bmw, mercedes, ford);
+
+console.log(ford.speedUS);
+
+bmw.brake();
+bmw.accel();
+mercedes.brake();
+mercedes.accel();
+ford.brake();
+ford.accel();
+
+ford.speedUS = 50;
+console.log(ford);
+/////////////////
