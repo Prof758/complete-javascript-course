@@ -82,10 +82,49 @@ class PersonCl {
   greet() {
     console.log(`Hey I'm ${this.firstName}`);
   }
+
+  // getter and setter in classes
+  get age() {
+    return 2045 - this.birthYear;
+  }
+
+  // validation method using setter
+  // Set a property that already exist
+  set fullName(name) {
+    console.log();
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
 }
 
 const janet = new PersonCl('Janet', 1975);
 
 console.log(janet);
 janet.calcAge();
+
+// using getter to calculate age
+console.log(janet.age);
+
 janet.greet();
+
+// getter and setter in JS
+const account = {
+  user: 'Simon',
+  movements: [200, 400, 625, 500],
+
+  get lateDeposit() {
+    return this.movements.slice(-1).pop();
+  },
+
+  set deposit(mov) {
+    this.movements.push(mov);
+  },
+};
+
+console.log(account.lateDeposit);
+account.deposit = 550;
+console.log(account.movements);
