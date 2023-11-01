@@ -74,6 +74,7 @@ class PersonCl {
     this.firstName = firstName;
     this.birthYear = birthYear;
   }
+  // Instance methods
   // METHODS WILL BE ADD TO PROTOTYPE PROPERTY AUTOMATICALLY
   calcAge() {
     console.log(2045 - this.birthYear);
@@ -99,6 +100,12 @@ class PersonCl {
   get fullName() {
     return this._fullName;
   }
+
+  //Static method are not on the instances
+  static hey() {
+    console.log('Hey there');
+    console.log(this);
+  }
 }
 
 const janet = new PersonCl('Janet', 1975);
@@ -110,6 +117,8 @@ janet.calcAge();
 console.log(janet.age);
 
 janet.greet();
+
+PersonCl.hey();
 
 // getter and setter in JS
 const account = {
