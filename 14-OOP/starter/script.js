@@ -137,3 +137,22 @@ const account = {
 console.log(account.lateDeposit);
 account.deposit = 550;
 console.log(account.movements);
+
+// Object.create
+
+const PersonProto = {
+  calcAge() {
+    console.log(2045 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const paul = Object.create(PersonProto);
+paul.init('Paul', 2020);
+
+console.log(paul);
+paul.calcAge();
