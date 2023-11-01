@@ -157,7 +157,7 @@ paul.init('Paul', 2020);
 console.log(paul);
 paul.calcAge();
 
-// Coding Challenge #2
+// Coding Challenge #2 ES6 classes
 
 class CarCl {
   constructor(carMake, carSpeed) {
@@ -180,12 +180,12 @@ class CarCl {
   }
 }
 
-const bmw = new CarCl('BMW', 120);
+const bmw = new CarCl('BMW', 130);
 const mercedes = new CarCl('Mercedes', 95);
 const ford = new CarCl('Ford', 120);
 console.log(bmw, mercedes, ford);
 
-console.log(ford.speedUS);
+console.log(` Ford US speed ${ford.speedUS}`);
 
 bmw.brake();
 bmw.accel();
