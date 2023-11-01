@@ -62,3 +62,30 @@ carOne.accel();
 carTwo.brake();
 carTwo.accel();
 /////////////////
+
+// ES6 Classes
+
+//class expression
+//const PersonCl = class {}
+
+// class declaration
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  // METHODS WILL BE ADD TO PROTOTYPE PROPERTY AUTOMATICALLY
+  calcAge() {
+    console.log(2045 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey I'm ${this.firstName}`);
+  }
+}
+
+const janet = new PersonCl('Janet', 1975);
+
+console.log(janet);
+janet.calcAge();
+janet.greet();
