@@ -221,3 +221,38 @@ tim.calcAge();
 // to fix the bag and tim instance of student
 Student.prototype.constructor = Student;
 console.log(tim.__proto__);
+
+// Coding Challenge #3
+
+const EV = function (carMake, carSpeed, charge) {
+  Car.call(this, carMake, carSpeed);
+  this.charge = charge;
+};
+
+EV.prototype = Object.create(Car.prototype);
+
+EV.prototype.chargeBattery = function (chargeTo) {
+  this.charge = chargeTo;
+};
+
+EV.prototype.accelerate = function () {
+  this.carSpeed += 20;
+  this.charge -= 1;
+  console.log(
+    `${this.carMake} speed is ${this.carSpeed}km/h and car charge remaining is ${this.charge}%`
+  );
+};
+
+const tesla = new EV('Tesla', 120, 23);
+
+console.log(tesla);
+tesla.brake();
+tesla.accel();
+tesla.chargeBattery(50);
+console.log(tesla);
+tesla.accelerate();
+tesla.accelerate();
+tesla.accelerate();
+tesla.brake();
+tesla.brake();
+tesla.accelerate();
