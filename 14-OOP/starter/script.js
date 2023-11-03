@@ -138,7 +138,7 @@ console.log(account.lateDeposit);
 account.deposit = 550;
 console.log(account.movements);
 
-// Object.create
+// Object.create to create a class
 
 const PersonProto = {
   calcAge() {
@@ -287,3 +287,25 @@ andy.calcAge();
 //property from the parent class
 andy.greet();
 console.log(andy.firstName);
+
+// Inheritance Between "Classes": Object.create
+
+// link student to person
+const StudentProto = Object.create(PersonProto);
+
+// create the student class
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+StudentProto.introduce = function () {
+  console.log(`Hey I'm ${this.firstName} studying ${this.course} at UWI`);
+};
+
+const mark = Object.create(StudentProto);
+mark.init('Mark', 2005, 'Bsc Cyber Security');
+
+console.log(mark);
+mark.introduce();
+mark.calcAge();
