@@ -256,3 +256,34 @@ tesla.accelerate();
 tesla.brake();
 tesla.brake();
 tesla.accelerate();
+
+// Inheritance Between "Classes": ES6 Classes
+
+class StudentCL extends PersonCl {
+  constructor(firstName, birthYear, course) {
+    super(firstName, birthYear);
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`Hey I'm ${this.firstName} studying ${this.course} at UWI`);
+  }
+
+  // override the calcAge from the parent class
+  calcAge() {
+    console.log(
+      `Being at Uni studying ${this.course}, I'm ${
+        2045 - this.birthYear
+      } but feel ${2045 - this.birthYear + 10}`
+    );
+  }
+}
+
+const andy = new StudentCL('Andy Prophet', 1994, 'Bsc Maths');
+
+console.log(andy);
+andy.introduce();
+andy.calcAge();
+//property from the parent class
+andy.greet();
+console.log(andy.firstName);
