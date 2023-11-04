@@ -309,3 +309,51 @@ mark.init('Mark', 2005, 'Bsc Cyber Security');
 console.log(mark);
 mark.introduce();
 mark.calcAge();
+
+// Another Class Example and additional features
+// applying ES6 classes to bank app
+
+class Account {
+  constructor(userName, pin, currency) {
+    this.userName = userName;
+    this.pin = pin;
+    this.currency = currency;
+
+    // below are properties not based on inputs
+    this.movements = [];
+    this.location = navigator.language;
+
+    console.log(`Welcome ${this.userName}, thank you for banking with us!`);
+  }
+
+  // public interface
+  deposit(val) {
+    this.movements.push(val);
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+  }
+
+  // simple example not real world.
+  // should be an internal method. data encapsulation and privacy needed.
+  approveLoan(val) {
+    return true;
+  }
+
+  // this method will be in the public interface
+  requestLoan(val) {
+    if (this.approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+      console.log(acc1.movements);
+    }
+  }
+}
+
+const acc1 = new Account('Simon', 1515, 'GBP');
+console.log(acc1);
+acc1.deposit(500);
+acc1.withdraw(100);
+console.log(acc1.movements);
+acc1.requestLoan(5000);
