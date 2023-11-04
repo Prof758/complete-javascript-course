@@ -316,11 +316,12 @@ mark.calcAge();
 class Account {
   constructor(userName, pin, currency) {
     this.userName = userName;
-    this.pin = pin;
+    //property property '_'
+    this._pin = pin;
     this.currency = currency;
 
     // below are properties not based on inputs
-    this.movements = [];
+    this._movements = [];
     this.location = navigator.language;
 
     console.log(`Welcome ${this.userName}, thank you for banking with us!`);
@@ -328,7 +329,11 @@ class Account {
 
   // public interface
   deposit(val) {
-    this.movements.push(val);
+    this._movements.push(val);
+  }
+
+  getMovements() {
+    return this._movements;
   }
 
   withdraw(val) {
@@ -337,16 +342,17 @@ class Account {
 
   // simple example not real world.
   // should be an internal method. data encapsulation and privacy needed.
-  approveLoan(val) {
+  // the '_' shows that the method is protected between coders
+  _approveLoan(val) {
     return true;
   }
 
   // this method will be in the public interface
   requestLoan(val) {
-    if (this.approveLoan(val)) {
+    if (this._approveLoan(val)) {
       this.deposit(val);
       console.log(`Loan approved`);
-      console.log(acc1.movements);
+      console.log(acc1.getMovements());
     }
   }
 }
@@ -355,5 +361,4 @@ const acc1 = new Account('Simon', 1515, 'GBP');
 console.log(acc1);
 acc1.deposit(500);
 acc1.withdraw(100);
-console.log(acc1.movements);
 acc1.requestLoan(5000);
