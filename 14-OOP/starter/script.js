@@ -165,11 +165,13 @@ class CarCl {
   }
 
   accel() {
-    console.log(`${(this.carSpeed += 10)}Km/h`);
+    console.log(`${this.carMake} is going at ${(this.carSpeed += 10)}Km/h`);
+    return this;
   }
 
   brake() {
-    console.log(`${(this.carSpeed -= 5)}Km/h`);
+    console.log(`${this.carMake} is going at ${(this.carSpeed -= 5)}Km/h`);
+    return this;
   }
   get speedUS() {
     return `${this.carSpeed / 1.6}mi/h`;
@@ -259,7 +261,7 @@ tesla.accelerate();
 
 // Inheritance Between "Classes": ES6 Classes
 
-class StudentCL extends PersonCl {
+class StudentCl extends PersonCl {
   constructor(firstName, birthYear, course) {
     super(firstName, birthYear);
     this.course = course;
@@ -279,7 +281,7 @@ class StudentCL extends PersonCl {
   }
 }
 
-const andy = new StudentCL('Andy Prophet', 1994, 'Bsc Maths');
+const andy = new StudentCl('Andy Prophet', 1994, 'Bsc Maths');
 
 console.log(andy);
 andy.introduce();
@@ -337,6 +339,7 @@ class Account {
   // public interface
   deposit(val) {
     this.#movements.push(val);
+    return this;
   }
 
   getMovements() {
@@ -345,6 +348,7 @@ class Account {
 
   withdraw(val) {
     this.deposit(-val);
+    return this;
   }
 
   // simple example not real world.
@@ -366,6 +370,7 @@ class Account {
       console.log(`Loan approved`);
       console.log(acc1.getMovements());
     }
+    return this;
   }
 }
 
@@ -379,3 +384,58 @@ acc1.requestLoan(5000);
 
 // notes
 // Using '#' before the field and method to make it private
+
+// Chaining method
+// simply add 'return this' at the end of the method
+
+acc1
+  .deposit(400)
+  .deposit(3000)
+  .withdraw(400)
+  .deposit(500)
+  .requestLoan(2500)
+  .withdraw(1500);
+
+console.log(acc1.getMovements());
+
+// Coding Challenge 4
+
+class EVCl extends CarCl {
+  #charge;
+
+  constructor(carMake, carSpeed, charge) {
+    super(carMake, carSpeed);
+    this.#charge = charge;
+  }
+
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    console.log(`${this.carMake} is changed to ${this.#charge}`);
+    return this;
+  }
+
+  accelerate() {
+    this.carSpeed += 20;
+    this.#charge -= 1;
+    console.log(
+      `${this.carMake} speed is ${
+        this.carSpeed
+      }km/h and car charge remaining is ${this.#charge}%`
+    );
+    return this;
+  }
+}
+
+const rivian = new EVCl('Rivian', 120, 23);
+
+console.log(rivian);
+
+rivian
+  .accelerate()
+  .accelerate()
+  .brake()
+  .accelerate()
+  .brake()
+  .chargeBattery(50)
+  .accelerate()
+  .brake();
