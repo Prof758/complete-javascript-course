@@ -314,26 +314,33 @@ mark.calcAge();
 // applying ES6 classes to bank app
 
 class Account {
+  // all create on the instance
+
+  //public fields
+  location = navigator.language;
+
+  //private
+  #movements = [];
+  #pin;
+
   constructor(userName, pin, currency) {
     this.userName = userName;
     //property property '_'
-    this._pin = pin;
+    this.#pin = pin;
     this.currency = currency;
 
     // below are properties not based on inputs
-    this._movements = [];
-    this.location = navigator.language;
 
     console.log(`Welcome ${this.userName}, thank you for banking with us!`);
   }
 
   // public interface
   deposit(val) {
-    this._movements.push(val);
+    this.#movements.push(val);
   }
 
   getMovements() {
-    return this._movements;
+    return this.#movements;
   }
 
   withdraw(val) {
@@ -344,6 +351,11 @@ class Account {
   // should be an internal method. data encapsulation and privacy needed.
   // the '_' shows that the method is protected between coders
   _approveLoan(val) {
+    return true;
+  }
+
+  // private method
+  #approveLoan(val) {
     return true;
   }
 
@@ -362,3 +374,8 @@ console.log(acc1);
 acc1.deposit(500);
 acc1.withdraw(100);
 acc1.requestLoan(5000);
+
+// console.log(acc1.#approveLoan());
+
+// notes
+// Using '#' before the field and method to make it private
