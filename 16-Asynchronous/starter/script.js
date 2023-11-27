@@ -25,7 +25,10 @@ const renderCountry = function (data, className = '') {
   </article>
   `;
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
+};
+
+const renderError = function (msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
 };
 
 ///////////////////////////////////////
@@ -96,9 +99,21 @@ const getCountryData = function (country) {
     .then(data => {
       // console.log(data);
       renderCountry(data[0], 'neighbour');
+    })
+    .catch(err => {
+      console.error(err);
+      renderError(
+        `Something went wrong with API. ${err.message}. Check internet connection.`
+      );
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
     });
 };
 
-getCountryData('portugal');
+btn.addEventListener('click', function () {
+  getCountryData('portugal');
+});
+
 // getCountryData('usa');
 // getCountryData('germany');
