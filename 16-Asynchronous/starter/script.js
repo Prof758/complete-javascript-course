@@ -7,7 +7,7 @@ const renderCountry = function (data, className = '') {
   const name = data.name.common;
   const flag = data.flags.svg;
   const region = data.region;
-  const language = Object.values(data.languages)[0];
+  const language = Object.values(data.languages)[0].name;
   const currency = Object.values(data.currencies)[0].name;
 
   const html = `
@@ -68,43 +68,63 @@ const renderError = function (msg) {
 
 //////////////////////////////////////////////
 
+const getJSON = function (url, errMsg = 'Something went wrong') {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`${errMsg} (${response.status})`);
+
+    console.log(response);
+
+    return response.json();
+  });
+};
+
 const getCountryData = function (country) {
   // country 1
 
   //fetch(`https://countries-api-836d.onrender.com/countries/name/${country}`)
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    // .then(function (response) {
-    //   console.log(response);
-    //   return response.json();
-    // })
-    // .then(function (data) {
-    //   console.log(data[0]);
-    //   renderCountry(data[0]);
-    // });
-    .then(response => response.json())
+  // fetch(`https://restcountries.com/v3.1/name/${country}`)
+  // .then(function (response) {
+  //   console.log(response);
+  //   return response.json();
+  // })
+  // .then(function (data) {
+  //   console.log(data[0]);
+  //   renderCountry(data[0]);
+  // });
+  //   .then(response => response.json())
+  getJSON(
+    `https://countries-api-836d.onrender.com/countries/name/${country}`,
+    'Country not found'
+  )
     .then(data => {
       console.log(data);
       console.log(data[0]);
 
       renderCountry(data[0]);
 
-      const neighbour = data[0].borders[0];
+      const neighbour = data[0].borders;
 
-      if (!neighbour) return;
+      if (!neighbour) throw new Error('Neighour Country not found');
 
       // country 2
-      return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`);
+      return getJSON(
+        `https://restcountries.com/v3.1/alpha/${neighbour[0]}`,
+        'Country not found.'
+      );
     })
-    .then(response => response.json())
+    // .then(response => {
+    //   console.log(response);
+    //   return response.json();
+    // })
     .then(data => {
-      // console.log(data);
+      console.log(data);
+      console.log();
+
       renderCountry(data[0], 'neighbour');
     })
     .catch(err => {
       console.error(err);
-      renderError(
-        `Something went wrong with API. ${err.message}. Check internet connection.`
-      );
+      renderError(`Something went wrong with the API. ${err.message}.`);
     })
     .finally(() => {
       countriesContainer.style.opacity = 1;
