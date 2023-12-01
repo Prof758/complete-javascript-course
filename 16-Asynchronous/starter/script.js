@@ -3,18 +3,64 @@
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
+// const renderHMTL = function () {
+//   const html = `
+//   <article class="country ${className}">
+//     <img class="country__img" src="${flag}" />
+//     <div class="country__data">
+//       <h3 class="country__name">${countryName}</h3>
+//       <h4 class="country__region">${region}</h4>
+//       <p class="country__row"><span>👫</span>${(
+//         +data.population / 1000000
+//       ).toFixed(1)} people</p>
+//       <p class="country__row"><span>🗣️</span>${language}</p>
+//       <p class="country__row"><span>💰</span>${currency}</p>
+//     </div>
+//   </article>
+//   `;
+//   countriesContainer.insertAdjacentHTML('beforeend', html);
+// };
+
 const renderCountry = function (data, className = '') {
-  const name = data.name.common;
+  const countryName = data.name;
   const flag = data.flags.svg;
   const region = data.region;
   const language = Object.values(data.languages)[0].name;
   const currency = Object.values(data.currencies)[0].name;
 
+  // renderHMTL();
+
   const html = `
   <article class="country ${className}">
     <img class="country__img" src="${flag}" />
     <div class="country__data">
-      <h3 class="country__name">${name}</h3>
+      <h3 class="country__name">${countryName}</h3>
+      <h4 class="country__region">${region}</h4>
+      <p class="country__row"><span>👫</span>${(
+        +data.population / 1000000
+      ).toFixed(1)} people</p>
+      <p class="country__row"><span>🗣️</span>${language}</p>
+      <p class="country__row"><span>💰</span>${currency}</p>
+    </div>
+  </article>
+  `;
+  countriesContainer.insertAdjacentHTML('beforeend', html);
+};
+
+const renderReighbour = function (data, className = '') {
+  const countryName = data.name.common;
+  const flag = data.flags.svg;
+  const region = data.region;
+  const language = Object.values(data.languages)[0];
+  const currency = Object.values(data.currencies)[0].name;
+
+  // renderHMTL();
+
+  const html = `
+  <article class="country ${className}">
+    <img class="country__img" src="${flag}" />
+    <div class="country__data">
+      <h3 class="country__name">${countryName}</h3>
       <h4 class="country__region">${region}</h4>
       <p class="country__row"><span>👫</span>${(
         +data.population / 1000000
@@ -120,7 +166,7 @@ const getCountryData = function (country) {
       console.log(data);
       console.log();
 
-      renderCountry(data[0], 'neighbour');
+      renderReighbour(data[0], 'neighbour');
     })
     .catch(err => {
       console.error(err);
@@ -132,8 +178,49 @@ const getCountryData = function (country) {
 };
 
 btn.addEventListener('click', function () {
-  getCountryData('portugal');
+  getCountryData('germany');
 });
 
 // getCountryData('usa');
 // getCountryData('germany');
+
+///////////////////////////////////////
+// Coding Challenge #1
+
+const whereAmI = function (lat, log) {
+  fetch(
+    `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${log}&format=json&apiKey=432f8b209d5047aaad1c74bf73361505`
+  )
+    .then(response => {
+      console.log(response);
+
+      if (!response.ok) {
+        throw new Error(`Problem with Geocoding API ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      // if (!data.results[0].city) {
+      //   data.results[0].city = `unknown town/village`;
+      //   console.log(
+      //     `You are in ${data.results[0].city}, ${data.results[0].country}.`
+      //   );
+      // } else `You are in ${data.results[0].city}, ${data.results[0].country}.`;
+
+      console.log(
+        `You are in ${data.results[0].city}, ${data.results[0].country}.`
+      );
+
+      getCountryData(data.results[0].country);
+    })
+    .catch(error => console.error('error', error.message));
+};
+
+// whereAmI(52.508, 13.381);
+// whereAmI(19.037, 72.873);
+whereAmI(-33.933, 18.474);
+
+// TEST COORDINATES 1: 52.508, 13.381 (Latitude, Longitude)
+// TEST COORDINATES 2: 19.037, 72.873
+// TEST COORDINATES 2: -33.933, 18.474
