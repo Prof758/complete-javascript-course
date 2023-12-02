@@ -73,6 +73,42 @@ const renderReighbour = function (data, className = '') {
   countriesContainer.insertAdjacentHTML('beforeend', html);
 };
 
+// const renderCountry = function (data, className = '') {
+//   const countryName = data.name;
+//   const flag = data.flags.svg;
+//   const region = data.region;
+//   const language = Object.values(data.languages)[0].name;
+//   const currency = Object.values(data.currencies)[0].name;
+
+//   renderHTML(countryName, flag, region, +data.population / 1000000, language, currency, className);
+// };
+
+// const renderReighbour = function (data, className = '') {
+//   const countryName = data.name.common;
+//   const flag = data.flags.svg;
+//   const region = data.region;
+//   const language = Object.values(data.languages)[0];
+//   const currency = Object.values(data.currencies)[0].name;
+
+//   renderHTML(countryName, flag, region, +data.population / 1000000, language, currency, className);
+// };
+
+// const renderHTML = function (countryName, flag, region, population, language, currency, className) {
+//   const html = `
+//     <article class="country ${className}">
+//       <img class="country__img" src="${flag}" />
+//       <div class="country__data">
+//         <h3 class="country__name">${countryName}</h3>
+//         <h4 class="country__region">${region}</h4>
+//         <p class="country__row"><span>👫</span>${population.toFixed(1)} people</p>
+//         <p class="country__row"><span>🗣️</span>${language}</p>
+//         <p class="country__row"><span>💰</span>${currency}</p>
+//       </div>
+//     </article>
+//   `;
+//   countriesContainer.insertAdjacentHTML('beforeend', html);
+// };
+
 const renderError = function (msg) {
   countriesContainer.insertAdjacentText('beforeend', msg);
 };
@@ -201,12 +237,6 @@ const whereAmI = function (lat, log) {
     })
     .then(data => {
       console.log(data);
-      // if (!data.results[0].city) {
-      //   data.results[0].city = `unknown town/village`;
-      //   console.log(
-      //     `You are in ${data.results[0].city}, ${data.results[0].country}.`
-      //   );
-      // } else `You are in ${data.results[0].city}, ${data.results[0].country}.`;
 
       console.log(
         `You are in ${data.results[0].city}, ${data.results[0].country}.`
@@ -224,3 +254,15 @@ whereAmI(-33.933, 18.474);
 // TEST COORDINATES 1: 52.508, 13.381 (Latitude, Longitude)
 // TEST COORDINATES 2: 19.037, 72.873
 // TEST COORDINATES 2: -33.933, 18.474
+
+///////////////////////////////////////
+
+// The Event Loop
+console.log('Test start'); // high level code
+setTimeout(() => console.log('0 sec timer '), 0); // callback queue
+Promise.resolve('Resolve promise 1').then(res => {
+  console.log(res);
+}); // microtask queue runs before callback queue
+console.log('Test end');
+
+// Building a Simple Promise
