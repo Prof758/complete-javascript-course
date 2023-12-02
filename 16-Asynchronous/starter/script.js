@@ -213,9 +213,9 @@ const getCountryData = function (country) {
     });
 };
 
-btn.addEventListener('click', function () {
-  getCountryData('germany');
-});
+// btn.addEventListener('click', function () {
+//   getCountryData('germany');
+// });
 
 // getCountryData('usa');
 // getCountryData('germany');
@@ -249,7 +249,7 @@ const whereAmI = function (lat, log) {
 
 // whereAmI(52.508, 13.381);
 // whereAmI(19.037, 72.873);
-whereAmI(-33.933, 18.474);
+// whereAmI(-33.933, 18.474);
 
 // TEST COORDINATES 1: 52.508, 13.381 (Latitude, Longitude)
 // TEST COORDINATES 2: 19.037, 72.873
@@ -306,3 +306,53 @@ wait(1)
 // return a Promise immediately
 Promise.resolve('ABC').then(res => console.log(res));
 Promise.reject(new Error('rejected ABC')).catch(res => console.error(res));
+
+// Promisifying the Geolocation
+
+navigator.geolocation.getCurrentPosition(
+  position => console.log(position),
+  err => console.error(err)
+);
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(err)
+    // );
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+getPosition().then(res => console.log(res));
+
+const whereAmIPromise = function (lat, log) {
+  getPosition()
+    .then(pos => {
+      const { latitude: lat, longitude: log } = pos.coords;
+
+      return fetch(
+        `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${log}&format=json&apiKey=432f8b209d5047aaad1c74bf73361505`
+      );
+    })
+    .then(response => {
+      console.log(response);
+
+      if (!response.ok) {
+        throw new Error(`Problem with Geocoding API ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+
+      console.log(
+        `You are in ${data.results[0].city}, ${data.results[0].country}.`
+      );
+
+      getCountryData(data.results[0].country);
+    })
+    .catch(error => console.error('error', error.message));
+};
+
+btn.addEventListener('click', whereAmIPromise);
