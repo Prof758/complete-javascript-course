@@ -381,6 +381,7 @@ const whereAmIPromise = function (lat, log) {
 
 btn.addEventListener('click', whereAmIPromise);
 
+///////////////////////////////////////
 //  Coding Challenge #2
 
 /* 
@@ -453,3 +454,45 @@ createImage(`img/img-1.jpg`)
     currentImg.style.display = 'none';
   })
   .catch(error => console.error(error));
+
+///////////////////////////////////////
+
+// Consuming Promises with Async/Await
+
+const whereAmIAsyncAwaitExample = async function (country) {
+  // fetch(
+  //   `https://countries-api-836d.onrender.com/countries/name/${country}`
+  // ).then(res => console.log(res));
+
+  // async await new way of working with promises fetch().then()
+  const res = await fetch(
+    `https://countries-api-836d.onrender.com/countries/name/${country}`
+  );
+  const data = await res.json();
+  renderCountry(data[0]);
+};
+
+// whereAmIAsyncAwait('saint lucia');
+
+// Rewrite whereAmI function with async and await
+
+const whereAmIAsyncAwait = async function () {
+  const pos = await getPosition();
+  const { latitude: lat, longitude: log } = pos.coords;
+
+  const resGeo = await fetch(
+    `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${log}&format=json&apiKey=432f8b209d5047aaad1c74bf73361505`
+  );
+
+  const dataGeo = await resGeo.json();
+  console.log(dataGeo);
+  console.log(dataGeo.results[0].country);
+
+  const res = await fetch(
+    `https://countries-api-836d.onrender.com/countries/name/${dataGeo.results[0].country}`
+  );
+  const data = await res.json();
+  renderCountry(data[0]);
+};
+
+whereAmIAsyncAwait();
