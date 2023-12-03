@@ -477,22 +477,30 @@ const whereAmIAsyncAwaitExample = async function (country) {
 // Rewrite whereAmI function with async and await
 
 const whereAmIAsyncAwait = async function () {
-  const pos = await getPosition();
-  const { latitude: lat, longitude: log } = pos.coords;
+  try {
+    const pos = await getPosition();
+    const { latitude: lat, longitude: log } = pos.coords;
 
-  const resGeo = await fetch(
-    `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${log}&format=json&apiKey=432f8b209d5047aaad1c74bf73361505`
-  );
+    const resGeo = await fetch(
+      `https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${log}&format=json&apiKey=432f8b209d5047aaad1c74bf73361505`
+    );
+    if (!resGeo.ok) throw new Error(`Boom Problem finding location`);
 
-  const dataGeo = await resGeo.json();
-  console.log(dataGeo);
-  console.log(dataGeo.results[0].country);
+    const dataGeo = await resGeo.json();
+    console.log(dataGeo);
+    console.log(dataGeo.results[0].country);
 
-  const res = await fetch(
-    `https://countries-api-836d.onrender.com/countries/name/${dataGeo.results[0].country}`
-  );
-  const data = await res.json();
-  renderCountry(data[0]);
+    const res = await fetch(
+      `https://countries-api-836d.onrender.com/countries/name/${dataGeo.results[0].country}`
+    );
+    if (!res.ok) throw new Error(`Boom Problem finding country`);
+
+    const data = await res.json();
+    renderCountry(data[0]);
+  } catch (err) {
+    console.error(err);
+    renderError(`BOOM ${err.message}`);
+  }
 };
 
 whereAmIAsyncAwait();
