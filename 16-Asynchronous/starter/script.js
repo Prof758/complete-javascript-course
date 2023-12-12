@@ -497,10 +497,29 @@ const whereAmIAsyncAwait = async function () {
 
     const data = await res.json();
     renderCountry(data[0]);
+
+    return `You are in ${dataGeo.results[0].city}, ${dataGeo.results[0].country}`;
   } catch (err) {
     console.error(err);
     renderError(`BOOM ${err.message}`);
+
+    // Reject promise returned from async function
+    throw err;
   }
 };
 
-whereAmIAsyncAwait();
+// whereAmIAsyncAwait();
+
+console.log('1: async test ');
+// whereAmIAsyncAwait().then(city => console.log(city));
+// console.log('3: async test ');
+
+(async function () {
+  try {
+    const city = await whereAmIAsyncAwait();
+    console.log(`2: ${city}`);
+  } catch (err) {
+    console.error(`BOOM: ${err.message} `);
+  }
+  console.log('3: async test ');
+})();
