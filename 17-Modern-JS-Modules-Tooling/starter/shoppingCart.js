@@ -16,6 +16,7 @@ const totalQuantity = 100;
 
 export { shippingCost, cart, totalPrice, totalQuantity };
 
+// working default export and import
 export default function (weekday, profit) {
   cart.push({ weekday, profit });
   console.log(`£${profit} of profit was made on ${weekday}`);
